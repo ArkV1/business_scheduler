@@ -1,0 +1,68 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Debug flag - IMPORTANT: Set to false in production!
+    function isDevMode() {
+      return true;  // TODO: Set to false before deploying
+    }
+    
+    // Helper function to get user data
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    
+    // Helper function to check if user is admin
+    function isAdmin() {
+      return isDevMode() || (request.auth != null && getUserData().isAdmin == true);
+    }
+
+    // Users collection rules
+    match /users/{userId} {
+      // Users can read their own data
+      allow read: if request.auth != null && request.auth.uid == userId;
+      // Only admins can write to user documents
+      allow write: if isAdmin();
+    }
+
+    // App settings rules
+    match /app_settings/{setting} {
+      // Anyone can read settings
+      allow read: if true;
+      // Only admins can modify settings
+      allow write: if isAdmin();
+    }
+
+    // Special hours collection rules
+    match /special_hours/{dateId} {
+      // Anyone can read special hours
+      allow read: if true;
+      // Only admins can modify special hours
+      allow write: if isAdmin();
+    }
+
+    // Appointments collection rules
+    match /appointments/{appointmentId} {
+      // Users can read their own appointments and admins can read all
+      allow read: if request.auth != null && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      
+      // Users can create appointments for themselves
+      allow create: if request.auth != null && 
+        request.resource.data.userId == request.auth.uid &&
+        request.resource.data.status == 'AppointmentStatus.pending';
+      
+      // Users can only update status of their own appointments
+      // Admins can update any appointment
+      allow update: if request.auth != null && (
+        (resource.data.userId == request.auth.uid && 
+         request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])) ||
+        isAdmin()
+      );
+      
+      // Only admins can delete appointments
+      allow delete: if isAdmin();
+    }
+  }
+} 

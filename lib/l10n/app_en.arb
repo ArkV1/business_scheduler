@@ -1,0 +1,569 @@
+{
+    "availableDates": "Available Dates",
+    "@availableDates": {
+        "description": "Title for the available dates section"
+    },
+    "selectDateAndTime": "Select Date & Time",
+    "@selectDateAndTime": {
+        "description": "Title for the date and time selection screen"
+    },
+    "bookingInstructions": "Choose an available date from the calendar below, then select your preferred time slot and service.",
+    "@bookingInstructions": {
+        "description": "Instructions for booking an appointment"
+    },
+    "scheduleNextVisit": "Schedule your next visit",
+    "@scheduleNextVisit": {
+        "description": "Subtitle for book appointment button"
+    },
+    "viewScheduledVisits": "View your scheduled visits",
+    "@viewScheduledVisits": {
+        "description": "Subtitle for my appointments button"
+    },
+    "availableServices": "Available Services",
+    "@availableServices": {
+        "description": "Title for the available services section"
+    },
+    "selectTimeAndService": "Select Time & Service",
+    "@selectTimeAndService": {
+        "description": "Title for the time and service selection screen"
+    },
+    "selectService": "Select a service",
+    "@selectService": {
+        "description": "Prompt to select a service"
+    },
+    "selectTimeSlot": "Select a time slot",
+    "@selectTimeSlot": {
+        "description": "Prompt to select a time slot"
+    },
+    "appointmentBookedSuccessfully": "Appointment booked successfully!",
+    "@appointmentBookedSuccessfully": {
+        "description": "Message shown when appointment is booked"
+    },
+    "errorBookingAppointment": "Error booking appointment",
+    "@errorBookingAppointment": {
+        "description": "Message shown when appointment booking fails"
+    },
+    "basicService": "Basic Service",
+    "premiumService": "Premium Service",
+    "duration30min": "30 min",
+    "duration60min": "60 min",
+    "price50": "$50",
+    "price100": "$100",
+    "myAppointments": "My Appointments",
+    "bookAppointment": "Book Appointment",
+    "quickContact": "Quick Contact",
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "language": "Language",
+    "settings": "Settings",
+    "home": "Home",
+    "login": "Login",
+    "logout": "Logout",
+    "noServicesAvailable": "No services available",
+    "@noServicesAvailable": {
+        "description": "Message shown when no services are available"
+    },
+    "noGalleryAvailable": "No gallery images available",
+    "@noGalleryAvailable": {
+        "description": "Message shown when no gallery images are available"
+    },
+    "noOpeningHoursAvailable": "No opening hours available",
+    "@noOpeningHoursAvailable": {
+        "description": "Message shown when no opening hours are available"
+    },
+    
+    "calendarAvailable": "Available",
+    "calendarUnavailable": "Unavailable",
+    "calendarClosed": "Closed",
+
+    "weekdayMon": "MON",
+    "weekdayTue": "TUE",
+    "weekdayWed": "WED",
+    "weekdayThu": "THU",
+    "weekdayFri": "FRI",
+    "weekdaySat": "SAT",
+    "weekdaySun": "SUN",
+
+    "weekdayFullMon": "Monday",
+    "weekdayFullTue": "Tuesday",
+    "weekdayFullWed": "Wednesday",
+    "weekdayFullThu": "Thursday",
+    "weekdayFullFri": "Friday",
+    "weekdayFullSat": "Saturday",
+    "weekdayFullSun": "Sunday",
+
+    "monthJan": "January",
+    "monthFeb": "February",
+    "monthMar": "March",
+    "monthApr": "April",
+    "monthMay": "May",
+    "monthJun": "June",
+    "monthJul": "July",
+    "monthAug": "August",
+    "monthSep": "September",
+    "monthOct": "October",
+    "monthNov": "November",
+    "monthDec": "December",
+
+    "monthShortJan": "Jan",
+    "monthShortFeb": "Feb",
+    "monthShortMar": "Mar",
+    "monthShortApr": "Apr",
+    "monthShortMay": "May",
+    "monthShortJun": "Jun",
+    "monthShortJul": "Jul",
+    "monthShortAug": "Aug",
+    "monthShortSep": "Sep",
+    "monthShortOct": "Oct",
+    "monthShortNov": "Nov",
+    "monthShortDec": "Dec",
+
+    "openingHours": "Opening Hours",
+    "services": "Services",
+    "gallery": "Gallery",
+
+    "closed": "Closed",
+    "manageOpeningHours": "Manage Opening Hours",
+    "actions": "Quick Actions",
+    "contact": "Contact Us",
+
+    "openingHoursTitle": "Opening Hours",
+    "@openingHoursTitle": {
+        "description": "Title for the opening hours section"
+    },
+    "openingHoursToday": "Today's Hours",
+    "@openingHoursToday": {
+        "description": "Label for today's opening hours"
+    },
+    "openingHoursWeekly": "Weekly Hours",
+    "@openingHoursWeekly": {
+        "description": "Label for weekly opening hours"
+    },
+    "openingHoursSpecial": "Special Hours",
+    "@openingHoursSpecial": {
+        "description": "Label for special opening hours"
+    },
+    "openingHoursClosed": "Closed",
+    "@openingHoursClosed": {
+        "description": "Text shown when business is closed"
+    },
+    "openingHoursOpen": "Open",
+    "@openingHoursOpen": {
+        "description": "Text shown when business is open"
+    },
+    "openingHoursOpenUntil": "Open until {time}",
+    "@openingHoursOpenUntil": {
+        "description": "Text shown for when business closes",
+        "placeholders": {
+            "time": {
+                "type": "String",
+                "example": "21:00"
+            }
+        }
+    },
+    "openingHoursOpensAt": "Opens at {time}",
+    "@openingHoursOpensAt": {
+        "description": "Text shown for when business opens",
+        "placeholders": {
+            "time": {
+                "type": "String",
+                "example": "09:00"
+            }
+        }
+    },
+    "openingHoursTimeRange": "{openTime} - {closeTime}",
+    "@openingHoursTimeRange": {
+        "description": "Format for displaying opening hours time range",
+        "placeholders": {
+            "openTime": {
+                "type": "String",
+                "example": "09:00"
+            },
+            "closeTime": {
+                "type": "String",
+                "example": "21:00"
+            }
+        }
+    },
+    "openingHoursNote": "Note: {note}",
+    "@openingHoursNote": {
+        "description": "Format for displaying opening hours notes",
+        "placeholders": {
+            "note": {
+                "type": "String",
+                "example": "Early closing for holiday"
+            }
+        }
+    },
+    "adminNoAccess": "You do not have admin access",
+    "goHome": "Go Home",
+    "businessManagement": "Business Management",
+    "servicesTitle": "Services",
+    "servicesSubtitle": "Manage business services and prices",
+    "openingHoursSubtitle": "Set business hours and special dates",
+    "contentManagement": "Content Management",
+    "galleryTitle": "Gallery",
+    "gallerySubtitle": "Manage photo gallery",
+    "socialLinksTitle": "Social Links",
+    "socialLinksSubtitle": "Manage social media links",
+    "systemSettings": "System Settings",
+    "appSettingsTitle": "App Settings",
+    "appSettingsSubtitle": "Configure application settings",
+    "manageServices": "Manage Services",
+    "manageCategories": "Manage Categories",
+    "initializeDefaultServices": "Initialize Default Services",
+    "addNewService": "Add New Service",
+    "noCategories": "No categories available",
+    "noServices": "No services available",
+    "deleteService": "Delete Service",
+    "deleteServiceConfirm": "Are you sure you want to delete this service?",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "serviceUpdated": "Service updated",
+    "serviceDeleted": "Service deleted",
+    "serviceCreated": "Service created",
+    "error": "Error: {error}",
+    "addService": "Add Service",
+    "editService": "Edit Service",
+    "category": "Category",
+    "selectCategory": "Please select a category",
+    "nameEnglish": "Name (English)",
+    "nameHebrew": "Name (Hebrew)",
+    "pleaseEnterName": "Please enter a name",
+    "pleaseEnterHebrewName": "Please enter a Hebrew name",
+    "duration": "Duration (minutes)",
+    "pleaseEnterDuration": "Please enter duration",
+    "enterValidDuration": "Please enter a valid duration",
+    "price": "Price",
+    "pleaseEnterPrice": "Please enter price",
+    "enterValidPrice": "Please enter a valid price",
+    "startingPrice": "Starting price",
+    "priceVaryAddons": "Price may vary based on add-ons",
+    "descriptionEnglish": "Description (English)",
+    "descriptionHebrew": "Description (Hebrew)",
+    "addons": "Add-ons:",
+    "addAddon": "Add Add-on",
+    "save": "Save",
+    "add": "Add",
+    "initializeConfirmTitle": "Initialize Default Services",
+    "initializeConfirmMessage": "This will delete all existing services and create the default set. Are you sure you want to continue?",
+    "initialize": "Initialize",
+    "servicesInitialized": "Default services initialized successfully",
+    "errorInitializing": "Error initializing services: {error}",
+    "minutes": "min",
+    "manageCategories": "Manage Categories",
+    "noCategories": "No categories available",
+    "initializeDefaultCategories": "Initialize Default Categories",
+    "initializeCategoriesConfirmTitle": "Initialize Default Categories",
+    "initializeCategoriesConfirmMessage": "This will create the default set of categories. Are you sure you want to continue?",
+    "categoriesInitialized": "Default categories initialized",
+    "errorReorderingCategories": "Error reordering categories: {error}",
+    "categoryCreated": "Category created",
+    "categoryUpdated": "Category updated",
+    "deleteCategory": "Delete Category",
+    "deleteCategoryConfirm": "Are you sure you want to delete this category? This will also delete all subcategories and addons.",
+    "categoryDeleted": "Category deleted",
+    "subcategories": "{count} subcategories",
+    "addCategory": "Add Category",
+    "editCategory": "Edit Category",
+    "addNewCategory": "Add New Category",
+    "openingHoursTitle": "Opening Hours",
+    "addDay": "Add Day",
+    "done": "Done",
+    "specialHours": "Special Hours",
+    "edit": "Edit",
+    "noOpeningHours": "No opening hours set",
+    "initializeDefaultHours": "Initialize Default Hours",
+    "closed": "Closed",
+    "selectDayToAdd": "Select Day to Add",
+    "allDaysAdded": "All days are already added",
+    "removeDay": "Remove {day}",
+    "removeDayMessage": "How would you like to remove this day?",
+    "markAsClosed": "Mark as Closed",
+    "deleteCompletely": "Delete Completely",
+    "dayMarkedClosed": "Day marked as closed",
+    "dayDeleted": "Day deleted successfully",
+    "errorUpdatingDay": "Error updating day: {error}",
+    "hoursInitialized": "Opening hours initialized successfully",
+    "errorInitializingHours": "Error initializing opening hours: {error}",
+    "editDay": "Edit {day}",
+    "openTime": "Open Time",
+    "closeTime": "Close Time",
+    "hoursUpdated": "Opening hours updated successfully",
+    "errorUpdatingHours": "Error updating opening hours: {error}",
+    "galleryTitle": "Gallery",
+    "imageUploadSuccess": "Image uploaded successfully",
+    "imageUploadError": "Error uploading image: {error}",
+    "imageDeleteSuccess": "Image deleted successfully",
+    "imageDeleteError": "Error deleting image: {error}",
+    "galleryError": "Error: {error}",
+    "addPhoto": "Add Photo",
+    "preview": "Preview",
+    "socialLinks": "Social Links",
+    "addNewLink": "Add New Link",
+    "noSocialLinks": "No social links added",
+    "addSocialLink": "Add Social Link",
+    "editSocialLink": "Edit Social Link",
+    "selectPlatform": "Select Platform",
+    "platformName": "Platform Name",
+    "enterPlatformName": "Enter platform name",
+    "tapToSelectIcon": "Tap to select icon",
+    "urlOrContact": "URL or Contact",
+    "enterUrlOrContact": "Enter URL or contact information",
+    "deleteSocialLink": "Delete Social Link",
+    "deleteSocialLinkConfirm": "Are you sure you want to delete this social link?",
+    "socialLinkAdded": "Social link added successfully",
+    "socialLinkUpdated": "Social link updated successfully",
+    "socialLinkDeleted": "Social link deleted successfully",
+    "errorDeletingSocialLink": "Error deleting social link: {error}",
+    "errorPickingImage": "Error picking image: {error}",
+    "errorSavingSocialLink": "Error: {error}",
+    "errorReorderingSocialLinks": "Error reordering social links: {error}",
+    "appSettings": "App Settings",
+    "general": "General",
+    "enableDarkMode": "Enable Dark Mode",
+    "darkModeDescription": "Toggle between light and dark theme",
+    "enableNotifications": "Enable Notifications",
+    "notificationsDescription": "Receive appointment reminders and updates",
+    "appLanguage": "App Language",
+    "english": "English",
+    "hebrew": "Hebrew",
+    "about": "About",
+    "version": "Version",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "startingDayOfWeek": "Starting Day of Week",
+    "startingDayOfWeekDescription": "Choose whether the week starts on Sunday or Monday",
+    "sundayStart": "Week starts on Sunday",
+    "mondayStart": "Week starts on Monday",
+    "calendarType": "Calendar Type",
+    "calendarTypeDescription": "Choose between Gregorian and Jewish calendar",
+    "gregorianCalendar": "Gregorian Calendar",
+    "jewishCalendar": "Jewish Calendar",
+    "editHeader": "Edit Header",
+    "headerUpdated": "Header text updated successfully",
+    "adminDashboard": "Admin Dashboard",
+    "@adminDashboard": {
+        "description": "Title for the admin dashboard"
+    },
+    "socialLinks": "Social Links",
+    "@socialLinks": {
+        "description": "Title for social links section"
+    },
+    "adminSettings": "App Settings",
+    "@adminSettings": {
+        "description": "Title for admin settings"
+    },
+    "admin": "Admin",
+    "@admin": {
+        "description": "Generic admin title"
+    },
+    "register": "Register",
+    "@register": {
+        "description": "Title for registration page"
+    },
+    "profile": "Profile",
+    "@profile": {
+        "description": "Title for user profile"
+    },
+    "appointmentBooking": "Appointment Booking",
+    "@appointmentBooking": {
+        "description": "Generic title for appointment booking"
+    },
+    "welcomeBack": "Welcome Back",
+    "@welcomeBack": {
+        "description": "Welcome message on login screen"
+    },
+    "phoneNumber": "Phone Number",
+    "@phoneNumber": {
+        "description": "Label for phone number input"
+    },
+    "pleaseEnterPhoneNumber": "Please enter a phone number",
+    "@pleaseEnterPhoneNumber": {
+        "description": "Validation message for empty phone number"
+    },
+    "phoneNumberInternationalFormat": "Phone number must be in international format",
+    "@phoneNumberInternationalFormat": {
+        "description": "Validation message for phone number format"
+    },
+    "verificationCode": "Verification Code",
+    "@verificationCode": {
+        "description": "Label for verification code input"
+    },
+    "pleaseEnterVerificationCode": "Please enter the verification code",
+    "@pleaseEnterVerificationCode": {
+        "description": "Validation message for empty verification code"
+    },
+    "enterValidVerificationCode": "Please enter a valid verification code",
+    "@enterValidVerificationCode": {
+        "description": "Validation message for invalid verification code"
+    },
+    "verificationCodeSent": "Verification code sent!",
+    "@verificationCodeSent": {
+        "description": "Success message when verification code is sent"
+    },
+    "anErrorOccurred": "An error occurred",
+    "@anErrorOccurred": {
+        "description": "Generic error message"
+    },
+    "verifyAndLogin": "Verify & Login",
+    "@verifyAndLogin": {
+        "description": "Button text for verification and login"
+    },
+    "sendCode": "Send Code",
+    "@sendCode": {
+        "description": "Button text for sending verification code"
+    },
+    "dontHaveAccount": "Don't have an account? Sign up",
+    "@dontHaveAccount": {
+        "description": "Link text to registration page"
+    },
+    "forgotPassword": "Forgot Password?",
+    "@forgotPassword": {
+        "description": "Link text to forgot password page"
+    },
+    "createAccount": "Create Account",
+    "@createAccount": {
+        "description": "Title for the registration screen"
+    },
+    "fullName": "Full Name",
+    "@fullName": {
+        "description": "Label for full name input"
+    },
+    "pleaseEnterFullName": "Please enter your full name",
+    "@pleaseEnterFullName": {
+        "description": "Validation message for empty full name"
+    },
+    "email": "Email",
+    "@email": {
+        "description": "Label for email input"
+    },
+    "pleaseEnterEmail": "Please enter your email",
+    "@pleaseEnterEmail": {
+        "description": "Validation message for empty email"
+    },
+    "pleaseEnterValidEmail": "Please enter a valid email",
+    "@pleaseEnterValidEmail": {
+        "description": "Validation message for invalid email format"
+    },
+    "verifyAndRegister": "Verify & Register",
+    "@verifyAndRegister": {
+        "description": "Button text for verification and registration"
+    },
+    "alreadyHaveAccount": "Already have an account? Login",
+    "@alreadyHaveAccount": {
+        "description": "Link text to login page"
+    },
+    "forgotYourPassword": "Forgot Your Password?",
+    "@forgotYourPassword": {
+        "description": "Title for forgot password screen"
+    },
+    "forgotPasswordInstructions": "Enter your email address and we'll send you instructions to reset your password.",
+    "@forgotPasswordInstructions": {
+        "description": "Instructions text on forgot password screen"
+    },
+    "sendResetLink": "Send Reset Link",
+    "@sendResetLink": {
+        "description": "Button text for sending password reset link"
+    },
+    "backToLogin": "Back to Login",
+    "@backToLogin": {
+        "description": "Link text to go back to login"
+    },
+    "passwordResetEmailSent": "Password reset email sent. Please check your inbox.",
+    "@passwordResetEmailSent": {
+        "description": "Success message after sending reset email"
+    },
+    "password": "Password",
+    "@password": {
+        "description": "Label for password field"
+    },
+    "pleaseEnterPassword": "Please enter your password",
+    "@pleaseEnterPassword": {
+        "description": "Validation message when password is empty"
+    },
+    "passwordTooShort": "Password must be at least 6 characters",
+    "@passwordTooShort": {
+        "description": "Validation message when password is too short"
+    },
+    "confirmPassword": "Confirm Password",
+    "@confirmPassword": {
+        "description": "Label for confirm password field"
+    },
+    "pleaseConfirmPassword": "Please confirm your password",
+    "@pleaseConfirmPassword": {
+        "description": "Validation message when confirm password is empty"
+    },
+    "passwordsDoNotMatch": "Passwords do not match",
+    "@passwordsDoNotMatch": {
+        "description": "Validation message when passwords don't match"
+    },
+    "notLoggedIn": "Not logged in",
+    "@notLoggedIn": {
+        "description": "Message shown when user is not logged in"
+    },
+    "editProfile": "Edit Profile",
+    "@editProfile": {
+        "description": "Button text for editing profile"
+    },
+    "addPhoneNumber": "Add phone number",
+    "@addPhoneNumber": {
+        "description": "Tooltip for adding phone number"
+    },
+    "phoneNumberNotSet": "Not set - Add your phone number to help businesses contact you",
+    "@phoneNumberNotSet": {
+        "description": "Message shown when phone number is not set"
+    },
+    "adminStatus": "Admin Status",
+    "@adminStatus": {
+        "description": "Label for admin status"
+    },
+    "administrator": "Administrator",
+    "@administrator": {
+        "description": "Text showing administrator role"
+    },
+    "selectServiceAndTime": "Select Service & Time",
+    "@selectServiceAndTime": {
+        "description": "Title for the service and time selection dialog"
+    },
+    "availableTimeSlots": "Available Time Slots",
+    "@availableTimeSlots": {
+        "description": "Title for the available time slots section"
+    },
+    "selectServiceFirst": "Please select a service first",
+    "@selectServiceFirst": {
+        "description": "Message shown when no service is selected"
+    },
+    "confirm": "Confirm",
+    "@confirm": {
+        "description": "Text for confirm button"
+    },
+    "timeSlotNotAvailable": "This time slot is not available for the selected service duration",
+    "@timeSlotNotAvailable": {
+        "description": "Message shown when a time slot cannot accommodate the selected service duration"
+    },
+    "pleaseSignInToBook": "Please sign in to book an appointment",
+    "@pleaseSignInToBook": {
+        "description": "Message shown when trying to book without being logged in"
+    },
+    "pleaseSelectServiceAndTime": "Please select both a service and time slot",
+    "@pleaseSelectServiceAndTime": {
+        "description": "Message shown when service or time slot is not selected"
+    },
+    "appointmentCreatedSuccessfully": "Appointment created successfully!",
+    "@appointmentCreatedSuccessfully": {
+        "description": "Message shown when appointment is created successfully"
+    },
+    "errorCreatingAppointment": "Error creating appointment",
+    "@errorCreatingAppointment": {
+        "description": "Message shown when there's an error creating the appointment"
+    }
+}
