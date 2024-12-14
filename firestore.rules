@@ -4,7 +4,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
     // Debug flag - IMPORTANT: Set to false in production!
     function isDevMode() {
-      return true;  // TODO: Set to false before deploying
+      return false;  // Disabled for production security
     }
     
     // Helper function to get user data
@@ -14,31 +14,76 @@ service cloud.firestore {
     
     // Helper function to check if user is admin
     function isAdmin() {
-      return isDevMode() || (request.auth != null && getUserData().isAdmin == true);
+      return request.auth != null && getUserData().isAdmin == true;
+    }
+
+    // Helper function for data validation
+    function isValidString(field) {
+      return field is string && field.size() > 0 && field.size() < 500;
+    }
+
+    // Helper function for email validation
+    function isValidEmail(email) {
+      return email.matches('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$');
+    }
+
+    // Helper function for phone number validation
+    function isValidPhone(phone) {
+      return phone.matches('^\\+?[1-9]\\d{1,14}$');
+    }
+
+    // Helper function for timestamp validation
+    function isValidDate(date) {
+      return date is timestamp &&
+             date >= request.time &&
+             date < request.time + duration.value(365, "d");
+    }
+
+    // Helper function for business hours validation
+    function isValidBusinessHours(hours) {
+      return hours is map && 
+             hours.keys().hasAll(['start', 'end']) &&
+             hours.start is number && hours.start >= 0 && hours.start < 24 &&
+             hours.end is number && hours.end > hours.start && hours.end <= 24;
     }
 
     // Users collection rules
     match /users/{userId} {
       // Users can read their own data
       allow read: if request.auth != null && request.auth.uid == userId;
-      // Only admins can write to user documents
-      allow write: if isAdmin();
+      // Only admins can write to user documents, and data must be valid
+      allow write: if isAdmin() &&
+        request.resource.data.keys().hasAll(['email', 'displayName', 'createdAt', 'isAdmin']) &&
+        isValidString(request.resource.data.email) &&
+        isValidEmail(request.resource.data.email) &&
+        isValidString(request.resource.data.displayName) &&
+        (!request.resource.data.keys().hasAny(['phone']) || isValidPhone(request.resource.data.phone)) &&
+        request.resource.data.createdAt is timestamp &&
+        request.resource.data.isAdmin is bool;
     }
 
     // App settings rules
     match /app_settings/{setting} {
       // Anyone can read settings
       allow read: if true;
-      // Only admins can modify settings
-      allow write: if isAdmin();
+      // Only admins can modify settings and data must be valid
+      allow write: if isAdmin() &&
+        request.resource.data.keys().hasAll(['lastUpdated']) &&
+        request.resource.data.lastUpdated is timestamp &&
+        (!request.resource.data.keys().hasAny(['businessHours']) || isValidBusinessHours(request.resource.data.businessHours));
     }
 
     // Special hours collection rules
     match /special_hours/{dateId} {
       // Anyone can read special hours
       allow read: if true;
-      // Only admins can modify special hours
-      allow write: if isAdmin();
+      // Only admins can modify special hours and data must be valid
+      allow write: if isAdmin() &&
+        request.resource.data.keys().hasAll(['date', 'isOpen', 'hours', 'description']) &&
+        request.resource.data.date is timestamp &&
+        request.resource.data.isOpen is bool &&
+        isValidBusinessHours(request.resource.data.hours) &&
+        isValidString(request.resource.data.description);
     }
 
     // Appointments collection rules
@@ -48,16 +93,33 @@ service cloud.firestore {
         resource.data.userId == request.auth.uid || isAdmin()
       );
       
-      // Users can create appointments for themselves
+      // Users can create appointments for themselves with validation
       allow create: if request.auth != null && 
         request.resource.data.userId == request.auth.uid &&
-        request.resource.data.status == 'AppointmentStatus.pending';
+        request.resource.data.status == 'AppointmentStatus.pending' &&
+        isValidDate(request.resource.data.appointmentTime) &&
+        request.resource.data.keys().hasAll([
+          'userId', 
+          'appointmentTime', 
+          'status', 
+          'createdAt',
+          'duration',
+          'serviceType',
+          'notes'
+        ]) &&
+        request.resource.data.createdAt == request.time &&
+        request.resource.data.duration is number &&
+        request.resource.data.duration >= 15 &&
+        request.resource.data.duration <= 180 &&
+        isValidString(request.resource.data.serviceType) &&
+        (!request.resource.data.keys().hasAny(['notes']) || isValidString(request.resource.data.notes));
       
       // Users can only update status of their own appointments
       // Admins can update any appointment
       allow update: if request.auth != null && (
         (resource.data.userId == request.auth.uid && 
-         request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])) ||
+         request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt']) &&
+         request.resource.data.updatedAt == request.time) ||
         isAdmin()
       );
       
