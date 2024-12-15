@@ -5,31 +5,46 @@ import '../services/category_management_service.dart';
 
 class DefaultServices {
   // Define required categories with their default configurations
-  static const Map<String, Map<String, dynamic>> requiredCategories = {
-    'Nails': {
+  static const List<Map<String, dynamic>> defaultCategories = [
+    {
+      'name': 'Nails',
       'nameHe': 'ציפורניים',
       'order': 1,
     },
-    'Add-ons': {
+    {
+      'name': 'Add-ons',
       'nameHe': 'תוספות',
       'order': 2,
     },
-    'Removal': {
+    {
+      'name': 'Removal',
       'nameHe': 'הסרה',
       'order': 3,
     },
-    'Feet': {
+    {
+      'name': 'Feet',
       'nameHe': 'רגליים',
       'order': 4,
     },
-    'Special Treatments': {
+    {
+      'name': 'Special Treatments',
       'nameHe': 'טיפולים מיוחדים',
       'order': 5,
     },
-    'Threading': {
+    {
+      'name': 'Threading',
       'nameHe': 'מריטה בחוט',
       'order': 6,
     },
+  ];
+
+  // Convert the list to a map for easier lookup
+  static final Map<String, Map<String, dynamic>> requiredCategories = {
+    for (var category in defaultCategories)
+      category['name'] as String: {
+        'nameHe': category['nameHe'],
+        'order': category['order'],
+      }
   };
 
   static List<Map<String, dynamic>> get defaultServices => [

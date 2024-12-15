@@ -8,8 +8,7 @@ part 'service_categories_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 Stream<List<ServiceCategory>> serviceCategories(Ref ref) {
-  final categoryManagement = ref.watch(categoryManagementProvider);
-  return categoryManagement.getAllServiceCategories();
+  return ref.watch(categoryManagementProvider).watchServiceCategories();
 }
 
 @Riverpod(keepAlive: true)

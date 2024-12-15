@@ -1,0 +1,29 @@
+{
+  "he": [
+    "addDay",
+    "done",
+    "specialHours",
+    "edit",
+    "noOpeningHours",
+    "initializeDefaultHours",
+    "selectDayToAdd",
+    "allDaysAdded",
+    "removeDay",
+    "removeDayMessage",
+    "markAsClosed",
+    "deleteCompletely",
+    "dayMarkedClosed",
+    "dayDeleted",
+    "errorUpdatingDay",
+    "hoursInitialized",
+    "errorInitializingHours",
+    "editDay",
+    "openTime",
+    "closeTime",
+    "hoursUpdated",
+    "calendarType",
+    "calendarTypeDescription",
+    "gregorianCalendar",
+    "jewishCalendar"
+  ]
+}

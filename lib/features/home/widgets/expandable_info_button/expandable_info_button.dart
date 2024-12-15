@@ -68,7 +68,10 @@ class _ExpandableInfoButtonState extends State<ExpandableInfoButton> with Single
       builder: (context, isHovered) => AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+        padding: const EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: 16,
+        ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           gradient: LinearGradient(
@@ -101,25 +104,27 @@ class _ExpandableInfoButtonState extends State<ExpandableInfoButton> with Single
         ),
         child: Row(
           children: [
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: theme.primaryColor.withOpacity(isHovered ? 0.15 : 0.1),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: widget.isSelected
-                      ? theme.primaryColor.withOpacity(0.2)
-                      : theme.dividerColor.withOpacity(0.2),
-                  width: 1,
+           
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: theme.primaryColor.withOpacity(isHovered ? 0.15 : 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: widget.isSelected
+                        ? theme.primaryColor.withOpacity(0.2)
+                        : theme.dividerColor.withOpacity(0.2),
+                    width: 1,
+                  ),
+                ),
+                child: Icon(
+                  widget.icon,
+                  color: theme.primaryColor,
+                  size: 20,
                 ),
               ),
-              child: Icon(
-                widget.icon,
-                color: theme.primaryColor,
-                size: 24,
-              ),
-            ),
-            const SizedBox(width: 16),
+              const SizedBox(width: 12),
+          
             Expanded(
               child: Text(
                 widget.title,

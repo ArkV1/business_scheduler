@@ -42,12 +42,188 @@ class HomeScreen extends ConsumerWidget {
           ),
           
           // Info Buttons Section with Shared Content
-          Column(
-            children: [
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
-                child: Row(
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isSmallScreen = constraints.maxWidth < 600;
+                
+                if (isSmallScreen) {
+                  return Column(
+                    children: [
+                      // Services Button - Full Width at top
+                      ExpandableInfoButton(
+                        title: l10n.services,
+                        icon: Icons.spa,
+                        isSelected: selectedTab == 1,
+                        onTap: () {
+                          ref.read(selectedTabProvider.notifier).state = 
+                              selectedTab == 1 ? null : 1;
+                        },
+                        expandedContent: Consumer(
+                          builder: (context, ref, child) {
+                            final servicesAsync = ref.watch(businessServicesProvider);
+                            return servicesAsync.when(
+                              data: (services) {
+                                if (services.isEmpty) {
+                                  return Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.spa_outlined,
+                                          size: 48,
+                                          color: Colors.grey[400],
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Text(
+                                          l10n.noServicesAvailable,
+                                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                            color: Colors.grey[600],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                                return ServicesTabView(services: services);
+                              },
+                              loading: () => const Center(child: CircularProgressIndicator()),
+                              error: (error, stack) => Text('Error: $error'),
+                            );
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      // Opening Hours and Gallery Buttons Row below
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ExpandableInfoButton(
+                              title: l10n.openingHours,
+                              icon: Icons.access_time,
+                              isSelected: selectedTab == 0,
+                              onTap: () {
+                                ref.read(selectedTabProvider.notifier).state = 
+                                    selectedTab == 0 ? null : 0;
+                              },
+                              expandedContent: Consumer(
+                                builder: (context, ref, child) {
+                                  final openingHoursAsync = ref.watch(openingHoursStreamProvider);
+                                  return openingHoursAsync.when(
+                                    data: (hours) {
+                                      if (hours.isEmpty) {
+                                        return Center(
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.access_time_outlined,
+                                                size: 48,
+                                                color: Colors.grey[400],
+                                              ),
+                                              const SizedBox(height: 16),
+                                              Text(
+                                                l10n.noOpeningHoursAvailable,
+                                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                                  color: Colors.grey[600],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }
+                                      return OpeningHoursDisplay(
+                                        hours: hours,
+                                        showTitle: false,
+                                        showToday: true,
+                                      );
+                                    },
+                                    loading: () => const Center(child: CircularProgressIndicator()),
+                                    error: (error, stack) => Text('Error: $error'),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: ExpandableInfoButton(
+                              title: l10n.gallery,
+                              icon: Icons.photo_library,
+                              isSelected: selectedTab == 2,
+                              onTap: () {
+                                ref.read(selectedTabProvider.notifier).state = 
+                                    selectedTab == 2 ? null : 2;
+                              },
+                              expandedContent: Consumer(
+                                builder: (context, ref, child) {
+                                  final galleryAsync = ref.watch(galleryImagesProvider);
+                                  return galleryAsync.when(
+                                    data: (images) {
+                                      if (images.isEmpty) {
+                                        return Center(
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.photo_library_outlined,
+                                                size: 48,
+                                                color: Colors.grey[400],
+                                              ),
+                                              const SizedBox(height: 16),
+                                              Text(
+                                                l10n.noGalleryAvailable,
+                                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                                  color: Colors.grey[600],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }
+                                      return GridView.builder(
+                                        shrinkWrap: true,
+                                        physics: const NeverScrollableScrollPhysics(),
+                                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 3,
+                                          crossAxisSpacing: 8,
+                                          mainAxisSpacing: 8,
+                                        ),
+                                        itemCount: images.length,
+                                        itemBuilder: (context, index) {
+                                          final image = images[index];
+                                          return ClipRRect(
+                                            borderRadius: BorderRadius.circular(8),
+                                            child: image.assetPath != null
+                                                ? Image.asset(
+                                                    image.assetPath!,
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : Image.network(
+                                                    image.url,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                    loading: () => const Center(child: CircularProgressIndicator()),
+                                    error: (error, stack) => Text('Error: $error'),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                }
+
+                // Original layout for larger screens
+                return Row(
                   children: [
                     Expanded(
                       flex: 1,
@@ -215,88 +391,97 @@ class HomeScreen extends ConsumerWidget {
                       ),
                     ),
                   ],
-                ),
-              ),
-              AnimatedSize(
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.easeInOutCubic,
-                alignment: Alignment.topCenter,
-                child: selectedTab != null
-                    ? Container(
-                        width: double.infinity,
-                        margin: const EdgeInsets.fromLTRB(8, 12, 8, 0),
-                        child: AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 600),
-                          switchInCurve: Curves.easeOutCubic,
-                          switchOutCurve: Curves.easeInCubic,
-                          transitionBuilder: (Widget child, Animation<double> animation) {
-                            return FadeTransition(
-                              opacity: CurvedAnimation(
-                                parent: animation,
-                                curve: Curves.easeInOut,
-                              ),
-                              child: SizeTransition(
-                                sizeFactor: CurvedAnimation(
-                                  parent: animation,
-                                  curve: Curves.easeInOutCubic,
-                                ),
-                                axisAlignment: -1,
-                                child: child,
-                              ),
-                            );
-                          },
-                          child: AnimatedContainer(
-                            key: ValueKey<int>(selectedTab),
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.easeInOutCubic,
-                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor.withOpacity(0.05),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            constraints: BoxConstraints(
-                              minHeight: 100,
-                              maxHeight: selectedTab == 1 ? 320 : 400,
-                            ),
-                            child: selectedTab == 1
-                                ? servicesAsync.when(
-                                    data: (services) {
-                                      if (services.isEmpty) {
-                                        return Center(
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(
-                                                Icons.spa_outlined,
-                                                size: 48,
-                                                color: Colors.grey[400],
-                                              ),
-                                              const SizedBox(height: 16),
-                                              Text(
-                                                l10n.noServicesAvailable,
-                                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                                  color: Colors.grey[600],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      }
-                                      return ServicesTabView(services: services);
-                                    },
-                                    loading: () => const Center(child: CircularProgressIndicator()),
-                                    error: (error, stack) => Text('Error: $error'),
-                                  )
-                                : SingleChildScrollView(
-                                    child: _buildTabContent(context, selectedTab, openingHoursAsync, servicesAsync),
-                                  ),
+                );
+              },
+            ),
+          ),
+          AnimatedSize(
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOutCubic,
+            alignment: Alignment.topCenter,
+            child: selectedTab != null
+                ? Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.fromLTRB(8, 12, 8, 0),
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 600),
+                      switchInCurve: Curves.easeOutCubic,
+                      switchOutCurve: Curves.easeInCubic,
+                      transitionBuilder: (Widget child, Animation<double> animation) {
+                        return FadeTransition(
+                          opacity: CurvedAnimation(
+                            parent: animation,
+                            curve: Curves.easeInOut,
                           ),
+                          child: SizeTransition(
+                            sizeFactor: CurvedAnimation(
+                              parent: animation,
+                              curve: Curves.easeInOutCubic,
+                            ),
+                            axisAlignment: -1,
+                            child: child,
+                          ),
+                        );
+                      },
+                      child: AnimatedContainer(
+                        key: ValueKey<int>(selectedTab),
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOutCubic,
+                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor.withOpacity(0.05),
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                      )
-                    : const SizedBox.shrink(),
-              ),
-            ],
+                        constraints: BoxConstraints(
+                          minHeight: 80,
+                          maxHeight: selectedTab == 1 ? 280 : 320,
+                        ),
+                        child: selectedTab == 1
+                            ? servicesAsync.when(
+                                data: (services) {
+                                  if (services.isEmpty) {
+                                    return Center(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.spa_outlined,
+                                            size: 48,
+                                            color: Colors.grey[400],
+                                          ),
+                                          const SizedBox(height: 16),
+                                          Text(
+                                            l10n.noServicesAvailable,
+                                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                              color: Colors.grey[600],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                  return ServicesTabView(services: services);
+                                },
+                                loading: () => const Center(child: CircularProgressIndicator()),
+                                error: (error, stack) => Text('Error: $error'),
+                              )
+                            : SingleChildScrollView(
+                                child: _buildTabContent(context, selectedTab, openingHoursAsync, servicesAsync),
+                              ),
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
+          ),
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Divider(
+              height: 0,
+              thickness: 1,
+              color: Theme.of(context).dividerColor.withOpacity(0.1),
+            ),
           ),
           const SizedBox(height: 16),
           // Quick Actions Section

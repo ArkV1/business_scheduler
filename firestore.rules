@@ -2,129 +2,85 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Debug flag - IMPORTANT: Set to false in production!
-    function isDevMode() {
-      return false;  // Disabled for production security
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
     }
     
-    // Helper function to get user data
-    function getUserData() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
-    }
-    
-    // Helper function to check if user is admin
     function isAdmin() {
-      return request.auth != null && getUserData().isAdmin == true;
+      return isAuthenticated() && 
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
     }
 
-    // Helper function for data validation
-    function isValidString(field) {
-      return field is string && field.size() > 0 && field.size() < 500;
-    }
-
-    // Helper function for email validation
-    function isValidEmail(email) {
-      return email.matches('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$');
-    }
-
-    // Helper function for phone number validation
-    function isValidPhone(phone) {
-      return phone.matches('^\\+?[1-9]\\d{1,14}$');
-    }
-
-    // Helper function for timestamp validation
-    function isValidDate(date) {
-      return date is timestamp &&
-             date >= request.time &&
-             date < request.time + duration.value(365, "d");
-    }
-
-    // Helper function for business hours validation
-    function isValidBusinessHours(hours) {
-      return hours is map && 
-             hours.keys().hasAll(['start', 'end']) &&
-             hours.start is number && hours.start >= 0 && hours.start < 24 &&
-             hours.end is number && hours.end > hours.start && hours.end <= 24;
-    }
-
-    // Users collection rules
-    match /users/{userId} {
-      // Users can read their own data
-      allow read: if request.auth != null && request.auth.uid == userId;
-      // Only admins can write to user documents, and data must be valid
-      allow write: if isAdmin() &&
-        request.resource.data.keys().hasAll(['email', 'displayName', 'createdAt', 'isAdmin']) &&
-        isValidString(request.resource.data.email) &&
-        isValidEmail(request.resource.data.email) &&
-        isValidString(request.resource.data.displayName) &&
-        (!request.resource.data.keys().hasAny(['phone']) || isValidPhone(request.resource.data.phone)) &&
-        request.resource.data.createdAt is timestamp &&
-        request.resource.data.isAdmin is bool;
-    }
-
-    // App settings rules
-    match /app_settings/{setting} {
-      // Anyone can read settings
+    // Public settings - readable by all, writable by admin
+    match /settings/{document=**} {
       allow read: if true;
-      // Only admins can modify settings and data must be valid
-      allow write: if isAdmin() &&
-        request.resource.data.keys().hasAll(['lastUpdated']) &&
-        request.resource.data.lastUpdated is timestamp &&
-        (!request.resource.data.keys().hasAny(['businessHours']) || isValidBusinessHours(request.resource.data.businessHours));
+      allow write: if isAdmin();
     }
 
-    // Special hours collection rules
+    // Business services and categories - readable by all, writable by admin
+    match /business_services/{serviceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /service_categories/{categoryId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+      
+      // Allow recursive access to subcategories
+      match /subcategories/{subcategoryId} {
+        allow read: if true;
+        allow create, update, delete: if isAdmin();
+        
+        // Allow access to all nested documents within subcategories
+        match /{document=**} {
+          allow read: if true;
+          allow create, update, delete: if isAdmin();
+        }
+      }
+    }
+
+    match /service_addons/{addonId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Social links - readable by all, writable by admin
+    match /social_links/{linkId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Business hours - readable by all, writable by admin
+    match /opening_hours/{dayId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
     match /special_hours/{dateId} {
-      // Anyone can read special hours
       allow read: if true;
-      // Only admins can modify special hours and data must be valid
-      allow write: if isAdmin() &&
-        request.resource.data.keys().hasAll(['date', 'isOpen', 'hours', 'description']) &&
-        request.resource.data.date is timestamp &&
-        request.resource.data.isOpen is bool &&
-        isValidBusinessHours(request.resource.data.hours) &&
-        isValidString(request.resource.data.description);
+      allow write: if isAdmin();
     }
 
-    // Appointments collection rules
+    // Appointments - public can see dates, authenticated users can see and manage their own
     match /appointments/{appointmentId} {
-      // Users can read their own appointments and admins can read all
-      allow read: if request.auth != null && (
-        resource.data.userId == request.auth.uid || isAdmin()
+      allow read: if true;
+      allow create: if isAuthenticated() && 
+        request.auth.uid == request.resource.data.userId;
+      allow update: if isAuthenticated() && (
+        request.auth.uid == resource.data.userId || isAdmin()
       );
-      
-      // Users can create appointments for themselves with validation
-      allow create: if request.auth != null && 
-        request.resource.data.userId == request.auth.uid &&
-        request.resource.data.status == 'AppointmentStatus.pending' &&
-        isValidDate(request.resource.data.appointmentTime) &&
-        request.resource.data.keys().hasAll([
-          'userId', 
-          'appointmentTime', 
-          'status', 
-          'createdAt',
-          'duration',
-          'serviceType',
-          'notes'
-        ]) &&
-        request.resource.data.createdAt == request.time &&
-        request.resource.data.duration is number &&
-        request.resource.data.duration >= 15 &&
-        request.resource.data.duration <= 180 &&
-        isValidString(request.resource.data.serviceType) &&
-        (!request.resource.data.keys().hasAny(['notes']) || isValidString(request.resource.data.notes));
-      
-      // Users can only update status of their own appointments
-      // Admins can update any appointment
-      allow update: if request.auth != null && (
-        (resource.data.userId == request.auth.uid && 
-         request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt']) &&
-         request.resource.data.updatedAt == request.time) ||
-        isAdmin()
-      );
-      
-      // Only admins can delete appointments
       allow delete: if isAdmin();
     }
+
+    // Users collection - users can read/write their own data, admin can read all
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (
+        request.auth.uid == userId || isAdmin()
+      );
+      allow write: if isAuthenticated() && request.auth.uid == userId;
+    }
   }
-} 
+}

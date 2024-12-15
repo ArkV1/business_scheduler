@@ -64,27 +64,33 @@ class _TimeSlotPickerState extends ConsumerState<TimeSlotPicker>
   }
 
   void _updateCategories(List<ServiceCategory> categories) {
-    if (categories.length != _categories.length) {
-      _categories = categories;
-      _servicesByCategory = {};
-      
-      for (final service in widget.services) {
-        final category = _categories.firstWhere(
-          (cat) => cat.id == service.id,
-          orElse: () => _categories.first,
-        );
-        
-        if (!_servicesByCategory.containsKey(category.id)) {
-          _servicesByCategory[category.id] = [];
-        }
-        _servicesByCategory[category.id]!.add(service);
+    // Group services by category
+    final newServicesByCategory = <String, List<BusinessService>>{};
+    for (final service in widget.services) {
+      if (service.isActive) {
+        newServicesByCategory.putIfAbsent(service.category, () => []);
+        newServicesByCategory[service.category]!.add(service);
       }
-      
-      _tabController?.dispose();
-      _tabController = TabController(
-        length: _categories.length,
-        vsync: this,
-      );
+    }
+
+    // Filter categories that have services and are active
+    final newCategories = categories
+        .where((category) => 
+            category.isActive && 
+            newServicesByCategory.containsKey(category.id))
+        .toList();
+
+    if (newCategories.length != _categories.length) {
+      setState(() {
+        _categories = newCategories;
+        _servicesByCategory = newServicesByCategory;
+        
+        _tabController?.dispose();
+        _tabController = TabController(
+          length: newCategories.length,
+          vsync: this,
+        );
+      });
     }
   }
 

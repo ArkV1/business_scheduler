@@ -4,6 +4,8 @@ import '../models/service_category.dart';
 import '../models/service_addon.dart';
 import '../../../core/utils/firebase_error_handler.dart';
 import '../../../core/services/logger_service.dart';
+import 'dart:async';
+import '../services/default_services.dart';
 
 final categoryManagementProvider = Provider<CategoryManagementService>((ref) {
   return CategoryManagementService();
@@ -13,6 +15,7 @@ class CategoryManagementService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String _categoriesCollection = 'service_categories';
   final String _addonsCollection = 'service_addons';
+  Stream<List<ServiceCategory>>? _categoriesStream;
 
   // Create a new service category
   Future<ServiceCategory> createServiceCategory({
@@ -54,85 +57,9 @@ class CategoryManagementService {
   }
 
   // Get all service categories
+  @Deprecated('Use watchServiceCategories() instead')
   Stream<List<ServiceCategory>> getAllServiceCategories({String? parentId}) {
-    try {
-      Logger.firebase(
-        'LISTEN',
-        _categoriesCollection,
-        data: {'parentId': parentId},
-      );
-
-      Query query = _firestore.collection(_categoriesCollection);
-      
-      // Remove the parentId filter for now to see all categories
-      // if (parentId != null) {
-      //   query = query.where('parentId', isEqualTo: parentId);
-      // } else {
-      //   query = query.where('parentId', isNull: true);
-      // }
-
-      // Try with ordering first
-      return query
-          .orderBy('order')
-          .snapshots()
-          .handleError((error, stackTrace) {
-            Logger.firebase(
-              'ERROR',
-              _categoriesCollection,
-              data: {'error': error.toString()},
-              level: LogLevel.error,
-              forceLog: true,
-            );
-            if (error is FirebaseException && 
-                error.code == 'failed-precondition' && 
-                error.message?.contains('index') == true) {
-              print('Index error detected, falling back to unordered query');
-              // If index error, fall back to unordered query
-              return query.snapshots();
-            }
-            handleFirebaseError(error, stackTrace);
-            throw error;
-          })
-          .map((snapshot) {
-            Logger.firebase(
-              'RECEIVED',
-              _categoriesCollection,
-              data: {
-                'count': snapshot.docs.length,
-                'fromCache': snapshot.metadata.isFromCache,
-              },
-            );
-            print('Got snapshot with ${snapshot.docs.length} documents');
-            if (snapshot.docs.isEmpty) {
-              print('No categories found in snapshot');
-              return const <ServiceCategory>[];
-            }
-
-            try {
-              final categories = snapshot.docs
-                  .map((doc) {
-                    // print('Processing doc ${doc.id}: ${doc.data()}');
-                    return ServiceCategory.fromFirestore(doc);
-                  })
-                  .toList();
-              
-              // If we're using the fallback query, sort in memory
-              if (!snapshot.metadata.isFromCache) {
-                categories.sort((a, b) => (a.order).compareTo(b.order));
-              }
-
-              print('Returning ${categories.length} categories');
-              return categories;
-            } catch (e) {
-              print('Error processing category documents: $e');
-              rethrow;
-            }
-          });
-    } catch (e) {
-      print('Error in getAllServiceCategories: $e');
-      // If any error occurs, return empty stream
-      return Stream.value([]);
-    }
+    return watchServiceCategories(parentId: parentId);
   }
 
   // Get subcategories for a category
@@ -207,84 +134,65 @@ class CategoryManagementService {
 
   // Delete a service category
   Future<void> deleteServiceCategory(String id) async {
-    final categoryRef = _firestore.collection(_categoriesCollection).doc(id);
-    final categoryDoc = await categoryRef.get();
-    
-    if (!categoryDoc.exists) return;
-    
-    final category = ServiceCategory.fromFirestore(categoryDoc);
+    try {
+      final categoryRef = _firestore.collection(_categoriesCollection).doc(id);
+      final categoryDoc = await categoryRef.get();
+      
+      if (!categoryDoc.exists) {
+        print('Category $id does not exist');
+        return;
+      }
+      
+      final category = ServiceCategory.fromFirestore(categoryDoc);
+      
+      print('Deleting category: ${category.name} (ID: $id)');
+      
+      // First handle subcategories
+      if (category.subCategoryIds.isNotEmpty) {
+        print('Deleting ${category.subCategoryIds.length} subcategories');
+        for (final subCategoryId in category.subCategoryIds) {
+          await deleteServiceCategory(subCategoryId);
+        }
+      }
 
-    // If this is a subcategory, remove it from parent's list
-    if (category.parentId != null) {
-      await _firestore.collection(_categoriesCollection).doc(category.parentId).update({
-        'subCategoryIds': FieldValue.arrayRemove([id])
-      });
+      // Then handle parent reference
+      if (category.parentId != null) {
+        print('Updating parent category ${category.parentId}');
+        await _firestore.collection(_categoriesCollection)
+            .doc(category.parentId)
+            .update({
+          'subCategoryIds': FieldValue.arrayRemove([id])
+        });
+      }
+
+      // Handle addons
+      if (category.addonIds.isNotEmpty) {
+        print('Deleting ${category.addonIds.length} addons');
+        for (final addonId in category.addonIds) {
+          await _firestore.collection(_addonsCollection)
+              .doc(addonId)
+              .delete();
+        }
+      }
+
+      // Finally delete the category itself
+      print('Deleting the category document');
+      await categoryRef.delete();
+
+      print('Category deletion completed successfully');
+    } catch (e, stackTrace) {
+      print('Error deleting category: $e');
+      print('Stack trace: $stackTrace');
+      rethrow;
     }
-
-    // Delete all subcategories recursively
-    for (final subCategoryId in category.subCategoryIds) {
-      await deleteServiceCategory(subCategoryId);
-    }
-
-    // Delete all associated addons
-    for (final addonId in category.addonIds) {
-      await _firestore.collection(_addonsCollection).doc(addonId).delete();
-    }
-
-    Logger.firebase(
-      'DELETE',
-      _categoriesCollection,
-      docId: id,
-    );
-
-    await categoryRef.delete();
-  }
-
-  // Check and initialize default categories if none exist
-  Future<void> _initializeDefaultCategoriesIfEmpty() async {
-    final snapshot = await _firestore.collection(_categoriesCollection).limit(1).get();
-    if (snapshot.docs.isNotEmpty) return;
-    
-    await initializeDefaultCategories();
   }
 
   // Initialize default categories
   Future<void> initializeDefaultCategories() async {
     try {
       print('\nInitializing default categories...');
-      final defaultCategories = [
-        {
-          'name': 'Nails',
-          'nameHe': 'ציפורניים',
-          'order': 1,
-        },
-        {
-          'name': 'Add-ons',
-          'nameHe': 'תוספות',
-          'order': 2,
-        },
-        {
-          'name': 'Removal',
-          'nameHe': 'הסרה',
-          'order': 3,
-        },
-        {
-          'name': 'Feet',
-          'nameHe': 'רגליים',
-          'order': 4,
-        },
-        {
-          'name': 'Special Treatments',
-          'nameHe': 'טיפולים מיוחדים',
-          'order': 5,
-        },
-        {
-          'name': 'Threading',
-          'nameHe': 'מריטה בחוט',
-          'order': 6,
-        },
-      ];
-
+      
+      final defaultCategories = DefaultServices.defaultCategories;
       final batch = _firestore.batch();
       
       for (final category in defaultCategories) {
@@ -398,5 +306,57 @@ class CategoryManagementService {
         .map((snapshot) => snapshot.docs
             .map((doc) => ServiceAddon.fromFirestore(doc))
             .toList());
+  }
+
+  Stream<List<ServiceCategory>> watchServiceCategories({String? parentId}) {
+    if (_categoriesStream != null) {
+      return _categoriesStream!;
+    }
+
+    Query query = _firestore.collection(_categoriesCollection);
+    
+    _categoriesStream = query
+        .orderBy('order')
+        .snapshots()
+        .handleError((error, stackTrace) {
+          Logger.firebase(
+            'ERROR',
+            _categoriesCollection,
+            data: {'error': error.toString()},
+            level: LogLevel.error,
+            forceLog: true,
+          );
+          if (error is FirebaseException && 
+              error.code == 'failed-precondition' && 
+              error.message?.contains('index') == true) {
+            print('Index error detected, falling back to unordered query');
+            return query.snapshots();
+          }
+          handleFirebaseError(error, stackTrace);
+          throw error;
+        })
+        .map((snapshot) {
+          Logger.firebase(
+            'RECEIVED',
+            _categoriesCollection,
+            data: {
+              'count': snapshot.docs.length,
+              'fromCache': snapshot.metadata.isFromCache,
+            },
+          );
+
+          final categories = snapshot.docs
+              .map((doc) => ServiceCategory.fromFirestore(doc))
+              .toList();
+          
+          if (!snapshot.metadata.isFromCache) {
+            categories.sort((a, b) => (a.order).compareTo(b.order));
+          }
+
+          return categories;
+        })
+        .asBroadcastStream();
+
+    return _categoriesStream!;
   }
 } 
