@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/appointment.dart';
 import '../providers/appointment_data_provider.dart';
 import '../../services/models/business_service.dart';
-import 'package:appointment_app/features/services/providers/business_services_provider.dart';
+import 'package:business_scheduler/features/services/providers/business_services_provider.dart';
 
 class AppointmentEditDialog extends ConsumerStatefulWidget {
   final Appointment appointment;

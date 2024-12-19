@@ -1,5 +1,5 @@
-name: appointment_app
-description: "A modern appointment booking application"
+name: business_scheduler
+description: "A modern appointment and client scheduling application for small businesses"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

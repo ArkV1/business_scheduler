@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:appointment_app/features/services/services/service_management_service.dart';
+import 'package:business_scheduler/features/services/services/service_management_service.dart';
 import '../models/service_category.dart';
 import '../services/category_management_service.dart';
 

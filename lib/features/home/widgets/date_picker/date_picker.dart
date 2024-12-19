@@ -5,11 +5,11 @@ import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../time_slot_picker/time_slot_picker.dart';
-import 'package:appointment_app/features/services/providers/business_services_provider.dart';
-import 'package:appointment_app/features/services/models/business_service.dart';
-import 'package:appointment_app/features/appointments/providers/appointment_state_provider.dart';
-import 'package:appointment_app/features/appointments/providers/appointment_availability_provider.dart';
-import 'package:appointment_app/features/home/widgets/calendar/calendar_providers.dart';
+import 'package:business_scheduler/features/services/providers/business_services_provider.dart';
+import 'package:business_scheduler/features/services/models/business_service.dart';
+import 'package:business_scheduler/features/appointments/providers/appointment_state_provider.dart';
+import 'package:business_scheduler/features/appointments/providers/appointment_availability_provider.dart';
+import 'package:business_scheduler/features/home/widgets/calendar/calendar_providers.dart';
 
 class DatePicker extends ConsumerWidget {
   final String id;

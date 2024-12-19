@@ -1,7 +1,7 @@
 // contact_button.styles.dart
 import 'package:flutter/material.dart';
 import 'package:mix/mix.dart' hide $token;
-import 'package:appointment_app/design/tokens/tokens.dart';
+import 'package:business_scheduler/design/tokens/tokens.dart';
 
 class ContactButtonStyles {
   Style container() => Style(

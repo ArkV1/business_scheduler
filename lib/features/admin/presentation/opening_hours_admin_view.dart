@@ -1,4 +1,4 @@
-import 'package:appointment_app/features/admin/presentation/special_hours_screen.dart';
+import 'package:business_scheduler/features/admin/presentation/special_hours_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../home/models/opening_hours.dart';

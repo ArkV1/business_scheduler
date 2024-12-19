@@ -1,11 +1,11 @@
-import 'package:appointment_app/features/appointments/models/time_slot_section.dart';
+import 'package:business_scheduler/features/appointments/models/time_slot_section.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/appointment.dart';
 import '../../../core/utils/firebase_error_handler.dart';
 import 'package:intl/intl.dart';
 import '../../services/models/business_service.dart';
-import 'package:appointment_app/core/services/logger_service.dart';
+import 'package:business_scheduler/core/services/logger_service.dart';
 
 
 class AppointmentService {

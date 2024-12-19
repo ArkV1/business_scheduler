@@ -1,6 +1,6 @@
-# appointment_app
+# business_scheduler
 
-A new Flutter project.
+A modern appointment and client scheduling application for small businesses.
 
 ## Getting Started
 

@@ -1,7 +1,7 @@
 // contact_button.dart
 import 'package:flutter/material.dart';
 import 'package:mix/mix.dart' hide $token;
-import 'package:appointment_app/features/home/widgets/contact_button/contact_button.styles.dart';
+import 'package:business_scheduler/features/home/widgets/contact_button/contact_button.styles.dart';
 
 class ContactButton extends StatelessWidget {
   const ContactButton({

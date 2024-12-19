@@ -1,9 +1,9 @@
-import 'package:appointment_app/features/admin/presentation/category_management_screen.dart';
-import 'package:appointment_app/features/admin/presentation/service_management_screen.dart';
-import 'package:appointment_app/features/admin/presentation/special_hours_screen.dart';
-import 'package:appointment_app/features/appointments/views/admin_appointments_view.dart';
-import 'package:appointment_app/features/appointments/presentation/booking_view.dart';
-import 'package:appointment_app/features/settings/presentation/user_settings_screen.dart';
+import 'package:business_scheduler/features/admin/presentation/category_management_screen.dart';
+import 'package:business_scheduler/features/admin/presentation/service_management_screen.dart';
+import 'package:business_scheduler/features/admin/presentation/special_hours_screen.dart';
+import 'package:business_scheduler/features/appointments/views/admin_appointments_view.dart';
+import 'package:business_scheduler/features/appointments/presentation/booking_view.dart';
+import 'package:business_scheduler/features/settings/presentation/user_settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,9 +21,9 @@ import '../../features/admin/presentation/social_links_screen.dart';
 import '../../features/admin/presentation/special_hours_list_view.dart';
 import '../../features/settings/presentation/app_settings_screen.dart';
 import 'page_transitions.dart';
-import 'package:appointment_app/features/auth/presentation/profile_screen.dart';
-import 'package:appointment_app/features/auth/presentation/forgot_password_screen.dart';
-import 'package:appointment_app/features/auth/presentation/edit_profile_screen.dart';
+import 'package:business_scheduler/features/auth/presentation/profile_screen.dart';
+import 'package:business_scheduler/features/auth/presentation/forgot_password_screen.dart';
+import 'package:business_scheduler/features/auth/presentation/edit_profile_screen.dart';
 
 
 extension GoRouterLocation on GoRouter {

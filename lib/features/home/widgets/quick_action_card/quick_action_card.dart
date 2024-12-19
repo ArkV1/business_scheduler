@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:appointment_app/features/common/widgets/hover_container.dart';
+import 'package:business_scheduler/features/common/widgets/hover_container.dart';
 
 class QuickActionCard extends StatelessWidget {
   const QuickActionCard({

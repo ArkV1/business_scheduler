@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mix/mix.dart' hide $token;
-import 'package:appointment_app/design/tokens/tokens.dart';
-import 'package:appointment_app/features/common/widgets/hover_container.dart';
+import 'package:business_scheduler/design/tokens/tokens.dart';
+import 'package:business_scheduler/features/common/widgets/hover_container.dart';
 
 class ExpandableInfoButton extends StatefulWidget {
   final String title;

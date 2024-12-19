@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:appointment_app/features/services/providers/service_categories_provider.dart';
-import 'package:appointment_app/features/services/models/service_category.dart';
-import 'package:appointment_app/features/services/services/category_management_service.dart';
-import 'package:appointment_app/features/admin/widgets/admin_app_bar.dart';
+import 'package:business_scheduler/features/services/providers/service_categories_provider.dart';
+import 'package:business_scheduler/features/services/models/service_category.dart';
+import 'package:business_scheduler/features/services/services/category_management_service.dart';
+import 'package:business_scheduler/features/admin/widgets/admin_app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CategoryManagementScreen extends ConsumerWidget {

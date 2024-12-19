@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:appointment_app/core/services/logger_service.dart';
+import 'package:business_scheduler/core/services/logger_service.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:appointment_app/features/appointments/providers/appointment_data_provider.dart';
-import 'package:appointment_app/features/appointments/services/appointment_service.dart';
+import 'package:business_scheduler/features/appointments/providers/appointment_data_provider.dart';
+import 'package:business_scheduler/features/appointments/services/appointment_service.dart';
 import '../models/appointment.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

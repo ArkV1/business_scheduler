@@ -1,12 +1,12 @@
-import 'package:appointment_app/core/router/router.dart';
+import 'package:business_scheduler/core/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:mix/mix.dart' hide $token;
-import 'package:appointment_app/design/tokens/tokens.dart';
+import 'package:business_scheduler/design/tokens/tokens.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:appointment_app/features/shell/widgets/app_drawer.dart';
-import 'package:appointment_app/features/auth/providers/user_provider.dart';
+import 'package:business_scheduler/features/shell/widgets/app_drawer.dart';
+import 'package:business_scheduler/features/auth/providers/user_provider.dart';
 
 class MainLayout extends ConsumerWidget {
   final Widget child;

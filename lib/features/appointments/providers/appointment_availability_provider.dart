@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../features/services/models/business_service.dart';
 import '../services/appointment_service.dart';
-import 'package:appointment_app/features/appointments/providers/appointment_data_provider.dart';
+import 'package:business_scheduler/features/appointments/providers/appointment_data_provider.dart';
 
 // Available time slots provider
 final availableTimeSlotsProvider = FutureProvider.family<List<String>, DateTime>((ref, date) {

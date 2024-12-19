@@ -1,4 +1,4 @@
-import 'package:appointment_app/features/appointments/providers/appointment_data_provider.dart';
+import 'package:business_scheduler/features/appointments/providers/appointment_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../services/models/business_service.dart';
@@ -6,11 +6,11 @@ import '../../../services/models/service_category.dart';
 import '../../../services/providers/service_categories_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:appointment_app/features/appointments/models/time_slot_section.dart';
+import 'package:business_scheduler/features/appointments/models/time_slot_section.dart';
 
-import 'package:appointment_app/features/appointments/providers/appointment_availability_provider.dart';
-import 'package:appointment_app/features/appointments/providers/appointment_state_provider.dart';
-import 'package:appointment_app/features/appointments/services/appointment_service.dart';
+import 'package:business_scheduler/features/appointments/providers/appointment_availability_provider.dart';
+import 'package:business_scheduler/features/appointments/providers/appointment_state_provider.dart';
+import 'package:business_scheduler/features/appointments/services/appointment_service.dart';
 
 class TimeSlotPicker extends ConsumerStatefulWidget {
   final List<BusinessService> services;

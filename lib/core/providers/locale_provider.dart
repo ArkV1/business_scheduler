@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:appointment_app/core/providers/theme_provider.dart';
+import 'package:business_scheduler/core/providers/theme_provider.dart';
 
 part 'locale_provider.g.dart';
 

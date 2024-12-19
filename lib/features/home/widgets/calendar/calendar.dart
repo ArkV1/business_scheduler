@@ -1,5 +1,5 @@
-import 'package:appointment_app/core/widgets/error_message.dart';
-import 'package:appointment_app/features/home/providers/opening_hours_provider.dart';
+import 'package:business_scheduler/core/widgets/error_message.dart';
+import 'package:business_scheduler/features/home/providers/opening_hours_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';

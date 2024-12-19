@@ -1,11 +1,11 @@
-import 'package:appointment_app/features/admin/presentation/gallery_screen.dart';
-import 'package:appointment_app/features/home/models/opening_hours.dart';
-import 'package:appointment_app/features/services/models/business_service.dart';
+import 'package:business_scheduler/features/admin/presentation/gallery_screen.dart';
+import 'package:business_scheduler/features/home/models/opening_hours.dart';
+import 'package:business_scheduler/features/services/models/business_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mix/mix.dart' hide $token;
-import 'package:appointment_app/design/tokens/tokens.dart';
+import 'package:business_scheduler/design/tokens/tokens.dart';
 import '../widgets/calendar/calendar.dart';
 import '../widgets/service_card.dart';
 import '../widgets/services_tab_view.dart';

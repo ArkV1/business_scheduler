@@ -11,8 +11,8 @@ import '../../home/widgets/calendar/calendar.dart';
 import '../../home/widgets/time_slot_picker/time_slot_picker.dart';
 import '../../services/providers/business_services_provider.dart';
 
-import 'package:appointment_app/features/home/widgets/calendar/calendar_providers.dart';
-import 'package:appointment_app/features/settings/providers/app_settings_provider.dart';
+import 'package:business_scheduler/features/home/widgets/calendar/calendar_providers.dart';
+import 'package:business_scheduler/features/settings/providers/app_settings_provider.dart';
 
 
 class BookingView extends ConsumerStatefulWidget {
