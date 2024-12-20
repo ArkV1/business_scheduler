@@ -12,8 +12,7 @@ _$AppointmentImpl _$$AppointmentImplFromJson(Map<String, dynamic> json) =>
       userId: json['userId'] as String,
       date: DateTime.parse(json['date'] as String),
       timeSlot: json['timeSlot'] as String,
-      service:
-          BusinessService.fromJson(json['service'] as Map<String, dynamic>),
+      serviceId: json['serviceId'] as String,
       status: $enumDecodeNullable(_$AppointmentStatusEnumMap, json['status']) ??
           AppointmentStatus.pending,
       notes: json['notes'] as String?,
@@ -31,7 +30,7 @@ Map<String, dynamic> _$$AppointmentImplToJson(_$AppointmentImpl instance) =>
       'userId': instance.userId,
       'date': instance.date.toIso8601String(),
       'timeSlot': instance.timeSlot,
-      'service': instance.service,
+      'serviceId': instance.serviceId,
       'status': _$AppointmentStatusEnumMap[instance.status]!,
       'notes': instance.notes,
       'createdAt': instance.createdAt?.toIso8601String(),

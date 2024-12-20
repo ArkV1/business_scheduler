@@ -135,7 +135,7 @@ class _BookingViewState extends ConsumerState<BookingView> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.bookAppointment),
+        // title: Text(l10n.bookAppointment),
         centerTitle: true,
       ),
       body: Column(

@@ -55,11 +55,11 @@ class AdminDashboardScreen extends ConsumerWidget {
         const SizedBox(height: 24),
         _buildSection(
           context,
-          'Appointments',
+          l10n.appointmentsManagement,
           [
             _AdminTile(
-              title: 'Manage Appointments',
-              subtitle: 'View and manage all appointments',
+              title: l10n.manageAppointments,
+              subtitle: l10n.appointmentsManagementSubtitle,
               icon: Icons.calendar_today,
               color: Colors.indigo,
               onTap: () => context.go('/admin/appointments'),

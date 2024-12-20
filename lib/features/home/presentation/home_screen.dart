@@ -18,6 +18,7 @@ import '../providers/opening_hours_provider.dart';
 import '../providers/social_links_provider.dart';
 import '../../services/providers/business_services_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:business_scheduler/features/common/widgets/unified_calendar.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -36,8 +37,9 @@ class HomeScreen extends ConsumerWidget {
           // Calendar Section
           Container(
             padding: const EdgeInsets.fromLTRB(4, 12, 4, 0),
-            child: const Calendar(
+            child: const UnifiedCalendar(
               id: 'home_calendar',
+              showTimeSlotPicker: true,
             ),
           ),
           

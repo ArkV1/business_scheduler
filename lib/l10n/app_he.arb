@@ -353,7 +353,7 @@
     "@pleaseEnterVerificationCode": {
         "description": "Validation message for empty verification code"
     },
-    "enterValidVerificationCode": "אנא הכנס קוד אימו�� תקין",
+    "enterValidVerificationCode": "אנא הכנס קוד אימות תקין",
     "@enterValidVerificationCode": {
         "description": "Validation message for invalid verification code"
     },
@@ -498,5 +498,149 @@
     "errorCreatingAppointment": "שגיאה בקביעת התור",
     "@errorCreatingAppointment": {
         "description": "Message shown when there's an error creating the appointment"
+    },
+    "manageAppointments": "ניהול תורים",
+    "@manageAppointments": {
+        "description": "Title for the appointments management screen"
+    },
+    "appointmentsOverview": "סקירת תורים",
+    "@appointmentsOverview": {
+        "description": "Title for the appointments overview section"
+    },
+    "filterAppointments": "סינון תורים",
+    "@filterAppointments": {
+        "description": "Tooltip for the filter appointments button"
+    },
+    "showCalendar": "הצג לוח שנה",
+    "@showCalendar": {
+        "description": "Tooltip for showing calendar view"
+    },
+    "showList": "הצג רשימה",
+    "@showList": {
+        "description": "Tooltip for showing list view"
+    },
+    "noAppointmentsOnDate": "אין תורים בתאריך {date}",
+    "@noAppointmentsOnDate": {
+        "description": "Message shown when there are no appointments on a specific date",
+        "placeholders": {
+            "date": {
+                "type": "String",
+                "example": "Jan 21, 2024"
+            }
+        }
+    },
+    "noAppointmentsFound": "לא נמצאו תורים",
+    "@noAppointmentsFound": {
+        "description": "Message shown when no appointments are found"
+    },
+    "clientId": "מזהה לקוח: {id}",
+    "@clientId": {
+        "description": "Label for client ID",
+        "placeholders": {
+            "id": {
+                "type": "String",
+                "example": "123456"
+            }
+        }
+    },
+    "service": "שירות",
+    "@service": {
+        "description": "Label for service"
+    },
+    "unknownService": "שירות לא ידוע",
+    "@unknownService": {
+        "description": "Text shown when service is unknown"
+    },
+    "durationMinutes": "{duration} דקות",
+    "@durationMinutes": {
+        "description": "Format for duration in minutes",
+        "placeholders": {
+            "duration": {
+                "type": "int",
+                "example": "30"
+            }
+        }
+    },
+    "priceAmount": "₪{amount}",
+    "@priceAmount": {
+        "description": "Format for price amount",
+        "placeholders": {
+            "amount": {
+                "type": "String",
+                "example": "50"
+            }
+        }
+    },
+    "notes": "הערות",
+    "@notes": {
+        "description": "Label for notes"
+    },
+    "editAppointment": "ערוך תור",
+    "@editAppointment": {
+        "description": "Tooltip for edit appointment button"
+    },
+    "appointmentsManagement": "תורים",
+    "@appointmentsManagement": {
+        "description": "Title for the appointments management section in admin dashboard"
+    },
+    "appointmentsManagementSubtitle": "צפייה וניהול כל התורים",
+    "@appointmentsManagementSubtitle": {
+        "description": "Subtitle for the appointments management section in admin dashboard"
+    },
+    "weekView": "תצוגת שבוע",
+    "@weekView": {
+        "description": "Tooltip for week view button"
+    },
+    "monthView": "תצוגת חודש",
+    "@monthView": {
+        "description": "Tooltip for month view button"
+    },
+    "available": "פנוי",
+    "@available": {
+        "description": "Label for available dates"
+    },
+    "fullyBooked": "תפוס",
+    "@fullyBooked": {
+        "description": "Label for fully booked dates"
+    },
+    "pastDate": "תאריך עבר",
+    "@pastDate": {
+        "description": "Label for past dates"
+    },
+    "dateRangeFormat": "{endDay} {endMonth} - {startDay} {startMonth}",
+    "@dateRangeFormat": {
+        "description": "Format for displaying date range in calendar",
+        "placeholders": {
+            "startMonth": {
+                "type": "String",
+                "example": "Jan"
+            },
+            "startDay": {
+                "type": "String",
+                "example": "1"
+            },
+            "endMonth": {
+                "type": "String",
+                "example": "Jan"
+            },
+            "endDay": {
+                "type": "String",
+                "example": "7"
+            }
+        }
+    },
+    "monthYearFormat": "{month} {year}",
+    "@monthYearFormat": {
+        "description": "Format for displaying month and year in calendar",
+        "placeholders": {
+            "month": {
+                "type": "String",
+                "example": "January"
+            },
+            "year": {
+                "type": "String",
+                "example": "2024"
+            }
+        }
     }
 }

@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../services/models/business_service.dart';
 
 part 'appointment.freezed.dart';
 part 'appointment.g.dart';
@@ -21,7 +20,7 @@ class Appointment with _$Appointment {
     required String userId,
     required DateTime date,
     required String timeSlot,
-    required BusinessService service,
+    required String serviceId,
     @Default(AppointmentStatus.pending) AppointmentStatus status,
     String? notes,
     DateTime? createdAt,
@@ -36,7 +35,7 @@ class Appointment with _$Appointment {
       'userId': userId,
       'date': Timestamp.fromDate(date),
       'timeSlot': timeSlot,
-      'serviceId': service.id,
+      'serviceId': serviceId,
       'status': status.toString(),
       'notes': notes,
       'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : FieldValue.serverTimestamp(),
@@ -44,25 +43,15 @@ class Appointment with _$Appointment {
     };
   }
 
-  static Future<Appointment> fromFirestore(DocumentSnapshot doc) async {
+  static Appointment fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    
-    // Get the service from Firestore
-    final serviceDoc = await FirebaseFirestore.instance
-        .collection('business_services')
-        .doc(data['serviceId'] as String)
-        .get();
-    
-    if (!serviceDoc.exists) {
-      throw Exception('Service not found');
-    }
 
     return Appointment(
       id: doc.id,
       userId: data['userId'] as String,
       date: (data['date'] as Timestamp).toDate(),
       timeSlot: data['timeSlot'] as String,
-      service: BusinessService.fromFirestore(serviceDoc),
+      serviceId: data['serviceId'] as String,
       status: AppointmentStatus.values.firstWhere(
         (e) => e.toString() == data['status'],
       ),

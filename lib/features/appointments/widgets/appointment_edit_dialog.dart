@@ -26,7 +26,7 @@ class _AppointmentEditDialogState extends ConsumerState<AppointmentEditDialog> {
   void initState() {
     super.initState();
     _status = widget.appointment.status;
-    _selectedService = widget.appointment.service;
+    _selectedService = ref.read(businessServicesProvider).value?.firstWhere((service) => service.id == widget.appointment.serviceId) ?? BusinessService(id: widget.appointment.serviceId, name: 'Unknown Service', nameHe: 'שירות לא ידוע', durationMinutes: 0, price: 0, isActive: false, category: 'unknown');
     _noteController.text = widget.appointment.notes ?? '';
   }
 

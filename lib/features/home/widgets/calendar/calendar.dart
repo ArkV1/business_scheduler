@@ -12,6 +12,9 @@ import '../../../appointments/providers/appointment_data_provider.dart';
 import '../../../auth/providers/user_provider.dart';
 import 'calendar_providers.dart';
 
+import 'package:business_scheduler/features/common/widgets/calendar/calendar_types.dart';
+
+
 class Calendar extends ConsumerStatefulWidget {
   final bool showTimeSlotPicker;
   final int? initialOffset;

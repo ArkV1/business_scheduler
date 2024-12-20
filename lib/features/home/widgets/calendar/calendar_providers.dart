@@ -1,9 +1,5 @@
+import 'package:business_scheduler/features/common/widgets/calendar/calendar_types.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-enum CalendarViewType {
-  week,
-  month,
-}
 
 final calendarViewTypeProvider = StateProvider.family<CalendarViewType, String>((ref, id) => CalendarViewType.week);
 

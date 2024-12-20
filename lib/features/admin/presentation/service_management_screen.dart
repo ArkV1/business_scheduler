@@ -47,7 +47,7 @@ class _BusinessServiceCard extends ConsumerWidget {
                           ),
                         ),
                         Text(
-                          '${service.durationMinutes}${l10n.minutes}',
+                          '${service.durationMinutes} ${l10n.minutes}',
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: Colors.grey[600],
                           ),

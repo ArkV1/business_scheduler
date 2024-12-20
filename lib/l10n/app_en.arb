@@ -565,5 +565,149 @@
     "errorCreatingAppointment": "Error creating appointment",
     "@errorCreatingAppointment": {
         "description": "Message shown when there's an error creating the appointment"
+    },
+    "manageAppointments": "Manage Appointments",
+    "@manageAppointments": {
+        "description": "Title for the appointments management screen"
+    },
+    "appointmentsOverview": "Appointments Overview",
+    "@appointmentsOverview": {
+        "description": "Title for the appointments overview section"
+    },
+    "filterAppointments": "Filter appointments",
+    "@filterAppointments": {
+        "description": "Tooltip for the filter appointments button"
+    },
+    "showCalendar": "Show calendar",
+    "@showCalendar": {
+        "description": "Tooltip for showing calendar view"
+    },
+    "showList": "Show list",
+    "@showList": {
+        "description": "Tooltip for showing list view"
+    },
+    "noAppointmentsOnDate": "No appointments on {date}",
+    "@noAppointmentsOnDate": {
+        "description": "Message shown when there are no appointments on a specific date",
+        "placeholders": {
+            "date": {
+                "type": "String",
+                "example": "Jan 21, 2024"
+            }
+        }
+    },
+    "noAppointmentsFound": "No appointments found",
+    "@noAppointmentsFound": {
+        "description": "Message shown when no appointments are found"
+    },
+    "clientId": "Client ID: {id}",
+    "@clientId": {
+        "description": "Label for client ID",
+        "placeholders": {
+            "id": {
+                "type": "String",
+                "example": "123456"
+            }
+        }
+    },
+    "service": "Service",
+    "@service": {
+        "description": "Label for service"
+    },
+    "unknownService": "Unknown Service",
+    "@unknownService": {
+        "description": "Text shown when service is unknown"
+    },
+    "durationMinutes": "{duration} minutes",
+    "@durationMinutes": {
+        "description": "Format for duration in minutes",
+        "placeholders": {
+            "duration": {
+                "type": "int",
+                "example": "30"
+            }
+        }
+    },
+    "priceAmount": "${amount}",
+    "@priceAmount": {
+        "description": "Format for price amount",
+        "placeholders": {
+            "amount": {
+                "type": "String",
+                "example": "50"
+            }
+        }
+    },
+    "notes": "Notes",
+    "@notes": {
+        "description": "Label for notes"
+    },
+    "editAppointment": "Edit Appointment",
+    "@editAppointment": {
+        "description": "Tooltip for edit appointment button"
+    },
+    "appointmentsManagement": "Appointments",
+    "@appointmentsManagement": {
+        "description": "Title for the appointments management section in admin dashboard"
+    },
+    "appointmentsManagementSubtitle": "View and manage all appointments",
+    "@appointmentsManagementSubtitle": {
+        "description": "Subtitle for the appointments management section in admin dashboard"
+    },
+    "weekView": "Week view",
+    "@weekView": {
+        "description": "Tooltip for week view button"
+    },
+    "monthView": "Month view",
+    "@monthView": {
+        "description": "Tooltip for month view button"
+    },
+    "available": "Available",
+    "@available": {
+        "description": "Label for available dates"
+    },
+    "fullyBooked": "Fully Booked",
+    "@fullyBooked": {
+        "description": "Label for fully booked dates"
+    },
+    "pastDate": "Past Date",
+    "@pastDate": {
+        "description": "Label for past dates"
+    },
+    "dateRangeFormat": "{startMonth} {startDay} - {endMonth} {endDay}",
+    "@dateRangeFormat": {
+        "description": "Format for displaying date range in calendar",
+        "placeholders": {
+            "startMonth": {
+                "type": "String",
+                "example": "Jan"
+            },
+            "startDay": {
+                "type": "String",
+                "example": "1"
+            },
+            "endMonth": {
+                "type": "String",
+                "example": "Jan"
+            },
+            "endDay": {
+                "type": "String",
+                "example": "7"
+            }
+        }
+    },
+    "monthYearFormat": "{month} {year}",
+    "@monthYearFormat": {
+        "description": "Format for displaying month and year in calendar",
+        "placeholders": {
+            "month": {
+                "type": "String",
+                "example": "January"
+            },
+            "year": {
+                "type": "String",
+                "example": "2024"
+            }
+        }
     }
 }

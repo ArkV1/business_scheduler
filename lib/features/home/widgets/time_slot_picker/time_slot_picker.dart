@@ -134,7 +134,8 @@ class _TimeSlotPickerState extends ConsumerState<TimeSlotPicker>
                 controller: _tabController,
                 isScrollable: true,
                 tabs: _categories.map((category) {
-                  return Tab(text: category.name);
+                  final isHebrew = Localizations.localeOf(context).languageCode == 'he';
+                  return Tab(text: isHebrew ? category.nameHe : category.name);
                 }).toList(),
               ),
               const SizedBox(height: 16),

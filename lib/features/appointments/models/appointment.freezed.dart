@@ -24,7 +24,7 @@ mixin _$Appointment {
   String get userId => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   String get timeSlot => throw _privateConstructorUsedError;
-  BusinessService get service => throw _privateConstructorUsedError;
+  String get serviceId => throw _privateConstructorUsedError;
   AppointmentStatus get status => throw _privateConstructorUsedError;
   String? get notes => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -51,13 +51,11 @@ abstract class $AppointmentCopyWith<$Res> {
       String userId,
       DateTime date,
       String timeSlot,
-      BusinessService service,
+      String serviceId,
       AppointmentStatus status,
       String? notes,
       DateTime? createdAt,
       DateTime? updatedAt});
-
-  $BusinessServiceCopyWith<$Res> get service;
 }
 
 /// @nodoc
@@ -79,7 +77,7 @@ class _$AppointmentCopyWithImpl<$Res, $Val extends Appointment>
     Object? userId = null,
     Object? date = null,
     Object? timeSlot = null,
-    Object? service = null,
+    Object? serviceId = null,
     Object? status = null,
     Object? notes = freezed,
     Object? createdAt = freezed,
@@ -102,10 +100,10 @@ class _$AppointmentCopyWithImpl<$Res, $Val extends Appointment>
           ? _value.timeSlot
           : timeSlot // ignore: cast_nullable_to_non_nullable
               as String,
-      service: null == service
-          ? _value.service
-          : service // ignore: cast_nullable_to_non_nullable
-              as BusinessService,
+      serviceId: null == serviceId
+          ? _value.serviceId
+          : serviceId // ignore: cast_nullable_to_non_nullable
+              as String,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -124,16 +122,6 @@ class _$AppointmentCopyWithImpl<$Res, $Val extends Appointment>
               as DateTime?,
     ) as $Val);
   }
-
-  /// Create a copy of Appointment
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $BusinessServiceCopyWith<$Res> get service {
-    return $BusinessServiceCopyWith<$Res>(_value.service, (value) {
-      return _then(_value.copyWith(service: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -149,14 +137,11 @@ abstract class _$$AppointmentImplCopyWith<$Res>
       String userId,
       DateTime date,
       String timeSlot,
-      BusinessService service,
+      String serviceId,
       AppointmentStatus status,
       String? notes,
       DateTime? createdAt,
       DateTime? updatedAt});
-
-  @override
-  $BusinessServiceCopyWith<$Res> get service;
 }
 
 /// @nodoc
@@ -176,7 +161,7 @@ class __$$AppointmentImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? date = null,
     Object? timeSlot = null,
-    Object? service = null,
+    Object? serviceId = null,
     Object? status = null,
     Object? notes = freezed,
     Object? createdAt = freezed,
@@ -199,10 +184,10 @@ class __$$AppointmentImplCopyWithImpl<$Res>
           ? _value.timeSlot
           : timeSlot // ignore: cast_nullable_to_non_nullable
               as String,
-      service: null == service
-          ? _value.service
-          : service // ignore: cast_nullable_to_non_nullable
-              as BusinessService,
+      serviceId: null == serviceId
+          ? _value.serviceId
+          : serviceId // ignore: cast_nullable_to_non_nullable
+              as String,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -231,7 +216,7 @@ class _$AppointmentImpl extends _Appointment {
       required this.userId,
       required this.date,
       required this.timeSlot,
-      required this.service,
+      required this.serviceId,
       this.status = AppointmentStatus.pending,
       this.notes,
       this.createdAt,
@@ -250,7 +235,7 @@ class _$AppointmentImpl extends _Appointment {
   @override
   final String timeSlot;
   @override
-  final BusinessService service;
+  final String serviceId;
   @override
   @JsonKey()
   final AppointmentStatus status;
@@ -263,7 +248,7 @@ class _$AppointmentImpl extends _Appointment {
 
   @override
   String toString() {
-    return 'Appointment(id: $id, userId: $userId, date: $date, timeSlot: $timeSlot, service: $service, status: $status, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Appointment(id: $id, userId: $userId, date: $date, timeSlot: $timeSlot, serviceId: $serviceId, status: $status, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -276,7 +261,8 @@ class _$AppointmentImpl extends _Appointment {
             (identical(other.date, date) || other.date == date) &&
             (identical(other.timeSlot, timeSlot) ||
                 other.timeSlot == timeSlot) &&
-            (identical(other.service, service) || other.service == service) &&
+            (identical(other.serviceId, serviceId) ||
+                other.serviceId == serviceId) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.notes, notes) || other.notes == notes) &&
             (identical(other.createdAt, createdAt) ||
@@ -288,7 +274,7 @@ class _$AppointmentImpl extends _Appointment {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, userId, date, timeSlot,
-      service, status, notes, createdAt, updatedAt);
+      serviceId, status, notes, createdAt, updatedAt);
 
   /// Create a copy of Appointment
   /// with the given fields replaced by the non-null parameter values.
@@ -312,7 +298,7 @@ abstract class _Appointment extends Appointment {
       required final String userId,
       required final DateTime date,
       required final String timeSlot,
-      required final BusinessService service,
+      required final String serviceId,
       final AppointmentStatus status,
       final String? notes,
       final DateTime? createdAt,
@@ -331,7 +317,7 @@ abstract class _Appointment extends Appointment {
   @override
   String get timeSlot;
   @override
-  BusinessService get service;
+  String get serviceId;
   @override
   AppointmentStatus get status;
   @override

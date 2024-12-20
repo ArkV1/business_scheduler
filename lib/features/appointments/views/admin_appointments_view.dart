@@ -1,3 +1,4 @@
+import 'package:business_scheduler/features/common/widgets/unified_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -10,9 +11,13 @@ import '../../../core/widgets/loading_indicator.dart';
 import '../../../core/widgets/error_message.dart';
 import '../widgets/appointment_edit_dialog.dart';
 import '../widgets/filter_dialog.dart';
-import '../../services/models/business_service.dart';
+import 'package:business_scheduler/features/services/providers/business_services_provider.dart';
 import '../../../features/admin/widgets/admin_app_bar.dart';
 import '../../../features/home/widgets/calendar/calendar_providers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:business_scheduler/features/common/widgets/calendar/calendar_types.dart';
+
 
 class AdminAppointmentsView extends ConsumerStatefulWidget {
   const AdminAppointmentsView({super.key});
@@ -101,12 +106,13 @@ class _AdminAppointmentsViewState extends ConsumerState<AdminAppointmentsView> {
     final selectedDate = ref.watch(selectedDateProvider(calendarId)) ?? DateTime.now();
     final currentMonth = ref.watch(currentMonthProvider(calendarId));
     final calendarViewType = ref.watch(calendarViewTypeProvider(calendarId));
+    final l10n = AppLocalizations.of(context)!;
     
     // Show index message if there's an index error
     if (_indexError != null && _indexError.toString().contains('indexes?create_composite=')) {
       return Scaffold(
         appBar: AdminAppBar(
-          title: 'Manage Appointments',
+          title: l10n.manageAppointments,
           backPath: '/admin',
         ),
         body: FirebaseIndexMessage(
@@ -125,13 +131,13 @@ class _AdminAppointmentsViewState extends ConsumerState<AdminAppointmentsView> {
     
     return Scaffold(
       appBar: AdminAppBar(
-        title: 'Manage Appointments',
+        title: l10n.manageAppointments,
         backPath: '/admin',
         actions: [
           IconButton(
             icon: const Icon(Icons.filter_list),
             onPressed: _showFilterDialog,
-            tooltip: 'Filter appointments',
+            tooltip: l10n.filterAppointments,
           ),
           IconButton(
             icon: Icon(_showAppointmentList ? Icons.calendar_month : Icons.list),
@@ -140,7 +146,7 @@ class _AdminAppointmentsViewState extends ConsumerState<AdminAppointmentsView> {
                 _showAppointmentList = !_showAppointmentList;
               });
             },
-            tooltip: _showAppointmentList ? 'Show calendar' : 'Show list',
+            tooltip: _showAppointmentList ? l10n.showCalendar : l10n.showList,
           ),
         ],
       ),
@@ -162,66 +168,13 @@ class _AdminAppointmentsViewState extends ConsumerState<AdminAppointmentsView> {
                   // Calendar Section
                   Container(
                     padding: const EdgeInsets.fromLTRB(4, 12, 4, 0),
-                    child: Column(
-                      children: [
-                        // Header row containing switch, title, and date interval
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-                          child: Row(
-                            children: [
-                              // View type switch
-                              SizedBox(
-                                width: 100,
-                                height: 32,
-                                child: SegmentedButton<CalendarViewType>(
-                                  segments: const [
-                                    ButtonSegment(
-                                      value: CalendarViewType.week,
-                                      icon: Icon(Icons.view_week, size: 16),
-                                    ),
-                                    ButtonSegment(
-                                      value: CalendarViewType.month,
-                                      icon: Icon(Icons.calendar_view_month, size: 16),
-                                    ),
-                                  ],
-                                  selected: {calendarViewType},
-                                  onSelectionChanged: (value) {
-                                    ref.read(calendarViewTypeProvider(calendarId).notifier).state = value.first;
-                                  },
-                                  showSelectedIcon: false,
-                                  style: ButtonStyle(
-                                    visualDensity: VisualDensity.compact,
-                                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                    padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 8)),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              // Header text
-                              Expanded(
-                                child: Text(
-                                  'Appointments Overview',
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              // Date text
-                              Text(
-                                DateFormat('MMM yyyy').format(currentMonth),
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const AdminCalendar(id: calendarId),
-                      ],
+                    child: UnifiedCalendar(
+                      id: calendarId,
+                      isAdmin: true,
+                      showTimeSlotPicker: false,
+                      onDateSelected: (date) {
+                        ref.read(selectedDateProvider(calendarId).notifier).state = date;
+                      },
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -265,6 +218,7 @@ class _AdminAppointmentsViewState extends ConsumerState<AdminAppointmentsView> {
   }
 
   Widget _buildDailyAppointments(BuildContext context, DateTime selectedDate) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -283,7 +237,7 @@ class _AdminAppointmentsViewState extends ConsumerState<AdminAppointmentsView> {
               ),
               const SizedBox(width: 12),
               Text(
-                DateFormat('MMMM d, y').format(selectedDate),
+                DateFormat.yMMMMd(Localizations.localeOf(context).languageCode).format(selectedDate),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w600,
                   color: Theme.of(context).colorScheme.primary,
@@ -302,397 +256,6 @@ class _AdminAppointmentsViewState extends ConsumerState<AdminAppointmentsView> {
           ),
         ),
       ],
-    );
-  }
-}
-
-class AdminCalendar extends ConsumerWidget {
-  final String id;
-
-  const AdminCalendar({super.key, required this.id});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final viewType = ref.watch(calendarViewTypeProvider(id));
-    final currentDate = ref.watch(currentMonthProvider(id));
-    final selectedDate = ref.watch(selectedDateProvider(id));
-    
-    // Watch both the appointments stream and available time slots
-    final appointmentsStream = ref.watch(dateAppointmentsProvider(currentDate));
-    final availableTimeSlots = ref.watch(availableTimeSlotsProvider(currentDate));
-
-    // Handle both streams together
-    return availableTimeSlots.when(
-      data: (timeSlots) {
-        return appointmentsStream.when(
-          data: (appointments) {
-            return Column(
-              children: [
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  height: viewType == CalendarViewType.week ? 90 : 280,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Row(
-                          children: [
-                            // Left arrow
-                            _buildNavigationButton(
-                              context,
-                              Icons.chevron_left,
-                              () {
-                                ref.read(currentMonthProvider(id).notifier).state = DateTime(
-                                  currentDate.year,
-                                  currentDate.month - 1,
-                                );
-                              },
-                            ),
-                            // Calendar
-                            Expanded(
-                              child: viewType == CalendarViewType.week
-                                  ? _WeekView(
-                                      selectedDate: selectedDate,
-                                      baseDate: currentDate,
-                                      appointments: appointments,
-                                    )
-                                  : _MonthView(
-                                      selectedDate: selectedDate,
-                                      baseDate: currentDate,
-                                      appointments: appointments,
-                                    ),
-                            ),
-                            // Right arrow
-                            _buildNavigationButton(
-                              context,
-                              Icons.chevron_right,
-                              () {
-                                ref.read(currentMonthProvider(id).notifier).state = DateTime(
-                                  currentDate.year,
-                                  currentDate.month + 1,
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      _buildLegend(context),
-                    ],
-                  ),
-                ),
-              ],
-            );
-          },
-          loading: () => const LoadingIndicator(),
-          error: (error, stack) {
-            if (error.toString().contains('indexes?create_composite=')) {
-              return FirebaseIndexMessage(error: error.toString());
-            }
-            return ErrorMessage(error.toString());
-          },
-        );
-      },
-      loading: () => const LoadingIndicator(),
-      error: (error, stack) {
-        if (error.toString().contains('indexes?create_composite=')) {
-          return FirebaseIndexMessage(error: error.toString());
-        }
-        return ErrorMessage(error.toString());
-      },
-    );
-  }
-
-  Widget _buildNavigationButton(BuildContext context, IconData icon, VoidCallback onPressed) {
-    return Container(
-      width: 24,
-      alignment: Alignment.center,
-      child: IconButton(
-        icon: Icon(
-          icon,
-          size: 24,
-          color: Theme.of(context).textTheme.bodySmall?.color,
-        ),
-        onPressed: onPressed,
-        splashRadius: 20,
-        padding: EdgeInsets.zero,
-        constraints: const BoxConstraints(),
-      ),
-    );
-  }
-
-  Widget _buildLegend(BuildContext context) {
-    return SizedBox(
-      height: 16,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _buildLegendItem(context, 'Available', Colors.green),
-          const SizedBox(width: 16),
-          _buildLegendItem(context, 'Fully Booked', Colors.orange),
-          const SizedBox(width: 16),
-          _buildLegendItem(context, 'Past Date', Colors.grey),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLegendItem(BuildContext context, String label, Color color) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          label,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            fontSize: 11,
-            color: Colors.black87,
-          ),
-        ),
-        const SizedBox(width: 4),
-        Container(
-          width: 8,
-          height: 8,
-          decoration: BoxDecoration(
-            color: color.withOpacity(0.2),
-            border: Border.all(color: color, width: 1),
-            shape: BoxShape.circle,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _WeekView extends ConsumerWidget {
-  final DateTime? selectedDate;
-  final DateTime baseDate;
-  final List<Appointment> appointments;
-
-  const _WeekView({
-    required this.selectedDate,
-    required this.baseDate,
-    required this.appointments,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final startOfWeek = baseDate.subtract(Duration(days: baseDate.weekday % 7));
-    final weekDays = List.generate(7, (index) => startOfWeek.add(Duration(days: index)));
-
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        const padding = 8.0;
-        const totalPadding = padding * 6;
-        final dayWidth = (constraints.maxWidth - totalPadding) / 7;
-
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: weekDays.asMap().entries.map((entry) {
-            final index = entry.key;
-            final date = entry.value;
-            
-            return Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  width: dayWidth,
-                  child: _DayCell(
-                    date: date,
-                    isSelected: selectedDate != null &&
-                        date.year == selectedDate!.year &&
-                        date.month == selectedDate!.month &&
-                        date.day == selectedDate!.day,
-                    appointments: appointments.where((apt) =>
-                        apt.date.year == date.year &&
-                        apt.date.month == date.month &&
-                        apt.date.day == date.day).toList(),
-                  ),
-                ),
-                if (index < 6) const SizedBox(width: padding),
-              ],
-            );
-          }).toList(),
-        );
-      },
-    );
-  }
-}
-
-class _MonthView extends ConsumerWidget {
-  final DateTime? selectedDate;
-  final DateTime baseDate;
-  final List<Appointment> appointments;
-
-  const _MonthView({
-    required this.selectedDate,
-    required this.baseDate,
-    required this.appointments,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final firstDayOfMonth = DateTime(baseDate.year, baseDate.month, 1);
-    final lastDayOfMonth = DateTime(baseDate.year, baseDate.month + 1, 0);
-    
-    final daysBeforeMonth = firstDayOfMonth.weekday % 7;
-    final firstDateToShow = firstDayOfMonth.subtract(Duration(days: daysBeforeMonth));
-    
-    final totalDays = daysBeforeMonth + lastDayOfMonth.day;
-    final totalWeeks = ((totalDays + 6) ~/ 7);
-
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final availableHeight = constraints.maxHeight - 24;
-        final dayHeight = availableHeight / totalWeeks;
-
-        return Column(
-          children: [
-            _buildWeekdayHeaders(),
-            Expanded(
-              child: Column(
-                children: List.generate(totalWeeks, (weekIndex) {
-                  return Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: List.generate(7, (dayIndex) {
-                        final date = firstDateToShow.add(
-                          Duration(days: weekIndex * 7 + dayIndex),
-                        );
-                        
-                        return SizedBox(
-                          width: 40,
-                          height: dayHeight,
-                          child: _DayCell(
-                            date: date,
-                            isSelected: selectedDate != null &&
-                                date.year == selectedDate!.year &&
-                                date.month == selectedDate!.month &&
-                                date.day == selectedDate!.day,
-                            isCurrentMonth: date.month == baseDate.month,
-                            appointments: appointments.where((apt) =>
-                                apt.date.year == date.year &&
-                                apt.date.month == date.month &&
-                                apt.date.day == date.day).toList(),
-                          ),
-                        );
-                      }),
-                    ),
-                  );
-                }),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildWeekdayHeaders() {
-    return SizedBox(
-      height: 24,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-            .map((day) => SizedBox(
-                  width: 40,
-                  child: Center(
-                    child: Text(
-                      day,
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ),
-                ))
-            .toList(),
-      ),
-    );
-  }
-}
-
-class _DayCell extends ConsumerWidget {
-  final DateTime date;
-  final bool isSelected;
-  final bool isCurrentMonth;
-  final List<Appointment> appointments;
-
-  const _DayCell({
-    required this.date,
-    required this.isSelected,
-    this.isCurrentMonth = true,
-    required this.appointments,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
-    final isToday = ref.watch(isDateTodayProvider(date));
-    final isPastDate = ref.watch(isPastDateProvider(date));
-    final isFullyBooked = appointments.length >= 8; // Using constant from service
-
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: (!isCurrentMonth || isPastDate) ? null : () {
-          ref.read(selectedDateProvider('admin_calendar').notifier).state = date;
-        },
-        borderRadius: BorderRadius.circular(4),
-        child: Container(
-          decoration: BoxDecoration(
-            color: isSelected
-                ? theme.primaryColor
-                : !isCurrentMonth || isPastDate
-                    ? Colors.transparent
-                    : isFullyBooked
-                        ? Colors.orange.withOpacity(0.1)
-                        : Colors.green.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(4),
-            border: isToday
-                ? Border.all(
-                    color: theme.primaryColor,
-                    width: 1,
-                  )
-                : null,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                date.day.toString(),
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: isSelected
-                      ? Colors.white
-                      : !isCurrentMonth
-                          ? Colors.grey
-                          : null,
-                ),
-              ),
-              if (appointments.isNotEmpty && isCurrentMonth) ...[
-                const SizedBox(height: 2),
-                Container(
-                  width: 16,
-                  height: 16,
-                  decoration: BoxDecoration(
-                    color: isSelected
-                        ? Colors.white.withOpacity(0.2)
-                        : theme.primaryColor.withOpacity(0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Text(
-                      appointments.length.toString(),
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: isSelected
-                            ? Colors.white
-                            : theme.primaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
@@ -719,12 +282,13 @@ class _AppointmentsList extends ConsumerWidget {
       status: status,
       serviceId: serviceId,
     )));
+    final l10n = AppLocalizations.of(context)!;
 
     return appointmentsStream.when(
       data: (appointments) => appointments.isEmpty
           ? Center(
               child: Text(
-                'No appointments on ${DateFormat('MMM dd, yyyy').format(date)}',
+                l10n.noAppointmentsOnDate(DateFormat('MMM dd, yyyy').format(date)),
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             )
@@ -767,6 +331,7 @@ class _AllAppointmentsList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final now = DateTime.now();
     final startOfDay = DateTime(now.year, now.month, now.day);
+    final l10n = AppLocalizations.of(context)!;
     
     final appointmentsStream = ref.watch(searchAppointmentsProvider((
       userId: null,
@@ -779,8 +344,8 @@ class _AllAppointmentsList extends ConsumerWidget {
     return appointmentsStream.when(
       data: (appointments) {
         if (appointments.isEmpty) {
-          return const Center(
-            child: Text('No appointments found'),
+          return Center(
+            child: Text(l10n.noAppointmentsFound),
           );
         }
 
@@ -800,7 +365,7 @@ class _AllAppointmentsList extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
-                    DateFormat('EEEE, MMMM d, y').format(date),
+                    DateFormat.yMMMMEEEEd(Localizations.localeOf(context).languageCode).format(date),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -854,6 +419,8 @@ class AppointmentCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final formattedTime = ref.watch(formattedTimeSlotProvider(appointment.timeSlot));
+    final service = ref.watch(businessServicesProvider).value?.firstWhere((service) => service.id == appointment.serviceId);
+    final l10n = AppLocalizations.of(context)!;
     
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
@@ -869,7 +436,7 @@ class AppointmentCard extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Client ID: ${appointment.userId}',
+                        l10n.clientId(appointment.userId),
                         style: theme.textTheme.titleMedium,
                       ),
                       const SizedBox(height: 4),
@@ -885,7 +452,7 @@ class AppointmentCard extends ConsumerWidget {
                 IconButton(
                   icon: const Icon(Icons.edit_outlined),
                   onPressed: onEdit,
-                  tooltip: 'Edit Appointment',
+                  tooltip: l10n.editAppointment,
                 ),
               ],
             ),
@@ -899,29 +466,29 @@ class AppointmentCard extends ConsumerWidget {
                       _buildInfoRow(
                         context,
                         Icons.calendar_today_outlined,
-                        'Service',
-                        appointment.service.name,
+                        l10n.service,
+                        service?.name ?? l10n.unknownService,
                       ),
                       const SizedBox(height: 8),
                       _buildInfoRow(
                         context,
                         Icons.timer_outlined,
-                        'Duration',
-                        '${appointment.service.durationMinutes} minutes',
+                        l10n.duration,
+                        l10n.durationMinutes(service?.durationMinutes ?? 0),
                       ),
                       const SizedBox(height: 8),
                       _buildInfoRow(
                         context,
                         Icons.attach_money_outlined,
-                        'Price',
-                        '\$${appointment.service.price}',
+                        l10n.price,
+                        l10n.priceAmount(service?.price.toString() ?? '0'),
                       ),
                       if (appointment.notes != null && appointment.notes!.isNotEmpty) ...[
                         const SizedBox(height: 8),
                         _buildInfoRow(
                           context,
                           Icons.notes_outlined,
-                          'Notes',
+                          l10n.notes,
                           appointment.notes!,
                         ),
                       ],

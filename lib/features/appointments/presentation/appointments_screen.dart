@@ -16,7 +16,7 @@ class AppointmentsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.myAppointments),
+        // title: Text(l10n.myAppointments),
       ),
       body: appointments.when(
         data: (appointments) {

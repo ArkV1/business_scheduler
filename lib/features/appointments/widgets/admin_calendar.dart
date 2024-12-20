@@ -5,6 +5,8 @@ import '../providers/appointment_state_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../features/home/widgets/calendar/calendar_providers.dart';
 
+import 'package:business_scheduler/features/common/widgets/calendar/calendar_types.dart';
+
 class AdminCalendar extends ConsumerWidget {
   final String id;
   
@@ -14,37 +16,15 @@ class AdminCalendar extends ConsumerWidget {
   });
 
   String _formatDate(BuildContext context, DateTime date, CalendarViewType viewType, DateTime currentDate) {
-    final l10n = AppLocalizations.of(context)!;
-    final isHebrew = Localizations.localeOf(context).languageCode == 'he';
-    
-    String _getMonthName(DateTime date, bool isShort) {
-      final monthIndex = date.month - 1;
-      final months = isShort ? [
-        l10n.monthShortJan, l10n.monthShortFeb, l10n.monthShortMar,
-        l10n.monthShortApr, l10n.monthShortMay, l10n.monthShortJun,
-        l10n.monthShortJul, l10n.monthShortAug, l10n.monthShortSep,
-        l10n.monthShortOct, l10n.monthShortNov, l10n.monthShortDec,
-      ] : [
-        l10n.monthJan, l10n.monthFeb, l10n.monthMar,
-        l10n.monthApr, l10n.monthMay, l10n.monthJun,
-        l10n.monthJul, l10n.monthAug, l10n.monthSep,
-        l10n.monthOct, l10n.monthNov, l10n.monthDec,
-      ];
-      return months[monthIndex];
-    }
+    final locale = Localizations.localeOf(context).languageCode;
     
     if (viewType == CalendarViewType.week) {
-      final startMonth = _getMonthName(currentDate, true);
-      final endMonth = _getMonthName(currentDate.add(const Duration(days: 6)), true);
-      final startDay = currentDate.day.toString();
-      final endDay = currentDate.add(const Duration(days: 6)).day.toString();
-      
-      return isHebrew 
-          ? '$endDay $endMonth - $startDay $startMonth'
-          : '$startMonth $startDay - $endMonth $endDay';
+      final endDate = currentDate.add(const Duration(days: 6));
+      final startFormatter = DateFormat.MMMd(locale);
+      final endFormatter = DateFormat.MMMd(locale);
+      return '${startFormatter.format(currentDate)} - ${endFormatter.format(endDate)}';
     } else {
-      final month = _getMonthName(currentDate, false);
-      return '$month ${currentDate.year}';
+      return DateFormat.yMMMM(locale).format(currentDate);
     }
   }
 
@@ -72,14 +52,16 @@ class AdminCalendar extends ConsumerWidget {
                 width: 100,
                 height: 32,
                 child: SegmentedButton<CalendarViewType>(
-                  segments: const [
+                  segments:  [
                     ButtonSegment(
                       value: CalendarViewType.week,
-                      icon: Icon(Icons.view_week, size: 16),
+                      icon: const Icon(Icons.view_week, size: 16),
+                      tooltip: l10n.weekView,
                     ),
                     ButtonSegment(
                       value: CalendarViewType.month,
-                      icon: Icon(Icons.calendar_view_month, size: 16),
+                      icon: const Icon(Icons.calendar_view_month, size: 16),
+                      tooltip: l10n.monthView,
                     ),
                   ],
                   selected: {viewType},
@@ -98,7 +80,7 @@ class AdminCalendar extends ConsumerWidget {
               // Header text
               Expanded(
                 child: Text(
-                  'Appointments',
+                  l10n.appointmentsOverview,
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,

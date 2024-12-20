@@ -34,7 +34,7 @@ class AppointmentService {
         userId: userId,
         date: date,
         timeSlot: timeSlot,
-        service: service,
+        serviceId: service.id,
         notes: notes,
         createdAt: DateTime.now(),
       ).toFirestore();
