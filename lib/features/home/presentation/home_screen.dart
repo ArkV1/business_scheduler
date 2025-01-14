@@ -4,10 +4,6 @@ import 'package:business_scheduler/features/services/models/business_service.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mix/mix.dart' hide $token;
-import 'package:business_scheduler/design/tokens/tokens.dart';
-import '../widgets/calendar/calendar.dart';
-import '../widgets/service_card.dart';
 import '../widgets/services_tab_view.dart';
 import '../widgets/quick_action_card/quick_action_card.dart';
 import '../widgets/social_links.dart';

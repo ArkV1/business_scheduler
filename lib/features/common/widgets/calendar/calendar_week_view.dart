@@ -2,6 +2,7 @@ import 'package:business_scheduler/features/appointments/models/appointment.dart
 import 'package:business_scheduler/features/home/models/opening_hours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class CalendarWeekView extends StatelessWidget {
   final bool isAdmin;
@@ -176,20 +177,8 @@ class CalendarWeekView extends StatelessWidget {
   }
 
   String _formatWeekday(BuildContext context, DateTime date) {
-    final l10n = AppLocalizations.of(context)!;
-    final weekdayIndex = date.weekday % 7;
-    
-    final weekdays = [
-      l10n.weekdaySun,
-      l10n.weekdayMon,
-      l10n.weekdayTue,
-      l10n.weekdayWed,
-      l10n.weekdayThu,
-      l10n.weekdayFri,
-      l10n.weekdaySat,
-    ];
-    
-    return weekdays[weekdayIndex];
+    final locale = Localizations.localeOf(context).languageCode;
+    return DateFormat('E', locale).format(date).toUpperCase();
   }
 
   int _getWeekdayFromName(String dayName) {

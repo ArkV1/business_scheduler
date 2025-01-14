@@ -7,7 +7,7 @@ import '../providers/appointment_data_provider.dart';
 import '../providers/appointment_state_provider.dart';
 import '../../auth/providers/user_provider.dart';
 import '../../home/providers/opening_hours_provider.dart';
-import '../../home/widgets/calendar/calendar.dart';
+import '../../common/widgets/unified_calendar.dart';
 import '../../home/widgets/time_slot_picker/time_slot_picker.dart';
 import '../../services/providers/business_services_provider.dart';
 
@@ -41,8 +41,6 @@ class _BookingViewState extends ConsumerState<BookingView> {
     DateTime date = DateTime(now.year, now.month, now.day);
     bool foundAvailable = false;
 
-    print('🔍 Starting search from: $date');
-
     // Look for the next 30 days maximum
     for (int i = 0; i < 30; i++) {
       final dayOfWeek = date.weekday;
@@ -51,51 +49,19 @@ class _BookingViewState extends ConsumerState<BookingView> {
         return hourWeekday == dayOfWeek && !hour.isClosed;
       });
 
-      print('📅 Checking date: $date (${_getWeekdayName(date.weekday)}) - isOpen: $isOpen');
-
       if (isOpen) {
         foundAvailable = true;
         break;
       }
-      date = DateTime(date.year, date.month, date.day + 1); // Add one day while keeping midnight
+      date = DateTime(date.year, date.month, date.day + 1);
     }
 
     if (foundAvailable) {
-      print('✅ Found available date: $date (${_getWeekdayName(date.weekday)})');
-      
-      // Get today's date at midnight for consistent calculations
-      final today = DateTime(now.year, now.month, now.day);
-      
-      // Find the start of the current week (Sunday)
-      final currentWeekStart = today.subtract(Duration(days: today.weekday % 7));
-      
-      // Find the start of the target week (Sunday)
-      final targetWeekStart = date.subtract(Duration(days: date.weekday % 7));
-      
-      // Calculate the week difference
-      final weekOffset = targetWeekStart.difference(currentWeekStart).inDays ~/ 7;
-
-      print('📊 Week calculation:');
-      print('  • Today: $today');
-      print('  • Current week start: $currentWeekStart');
-      print('  • Target week start: $targetWeekStart');
-      print('  • Week offset: $weekOffset');
-      
       // Update the calendar state
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        // First set the week offset
-        ref.read(weekOffsetProvider('booking_calendar').notifier).state = weekOffset;
-        
-        // Then update the current month and selected date
-        ref.read(currentMonthProvider('booking_calendar').notifier).state = date;
         ref.read(selectedDateProvider('booking_calendar').notifier).state = date;
+        ref.read(currentMonthProvider('booking_calendar').notifier).state = date;
       });
-
-      print('📅 Calendar state updated:');
-      print('  • Week offset: $weekOffset');
-      print('  • Selected date: $date');
-    } else {
-      print('❌ No available dates found in the next 30 days');
     }
   }
 
@@ -112,30 +78,15 @@ class _BookingViewState extends ConsumerState<BookingView> {
     }
   }
 
-  String _getWeekdayName(int weekday) {
-    switch (weekday) {
-      case DateTime.monday: return 'Monday';
-      case DateTime.tuesday: return 'Tuesday';
-      case DateTime.wednesday: return 'Wednesday';
-      case DateTime.thursday: return 'Thursday';
-      case DateTime.friday: return 'Friday';
-      case DateTime.saturday: return 'Saturday';
-      case DateTime.sunday: return 'Sunday';
-      default: return 'Unknown';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final selectedDate = ref.watch(selectedDateProvider('booking_calendar'));
     final timeSlots = ref.watch(availableTimeSlotsProvider(selectedDate ?? DateTime.now()));
     final services = ref.watch(businessServicesProvider).value ?? [];
-    final weekOffset = ref.watch(weekOffsetProvider('booking_calendar'));
     
     return Scaffold(
       appBar: AppBar(
-        // title: Text(l10n.bookAppointment),
         centerTitle: true,
       ),
       body: Column(
@@ -160,11 +111,13 @@ class _BookingViewState extends ConsumerState<BookingView> {
               ],
             ),
           ),
-          Calendar(
-            showTimeSlotPicker: false,
-            initialOffset: weekOffset,
-            initialDate: selectedDate,
+          UnifiedCalendar(
             id: 'booking_calendar',
+            showTimeSlotPicker: false,
+            onDateSelected: (date) {
+              // The UnifiedCalendar will handle the date selection internally
+              // and update the selectedDateProvider
+            },
           ),
           const SizedBox(height: 16),
           // Time Slot Picker Section

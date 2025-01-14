@@ -4,6 +4,7 @@ import '../models/opening_hours.dart';
 import '../models/special_hours.dart';
 import '../providers/opening_hours_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart' hide TextDirection; 
 
 class OpeningHoursDisplay extends ConsumerWidget {
   final List<OpeningHours> hours;
@@ -243,46 +244,8 @@ class _DayHoursDisplay extends StatelessWidget {
 }
 
 String _getLocalizedDayOfWeek(BuildContext context, int weekday, bool useShortName) {
-  final l10n = AppLocalizations.of(context)!;
-  if (useShortName) {
-    switch (weekday) {
-      case DateTime.monday:
-        return l10n.weekdayMon;
-      case DateTime.tuesday:
-        return l10n.weekdayTue;
-      case DateTime.wednesday:
-        return l10n.weekdayWed;
-      case DateTime.thursday:
-        return l10n.weekdayThu;
-      case DateTime.friday:
-        return l10n.weekdayFri;
-      case DateTime.saturday:
-        return l10n.weekdaySat;
-      case DateTime.sunday:
-        return l10n.weekdaySun;
-      default:
-        return l10n.weekdayMon;
-    }
-  } else {
-    switch (weekday) {
-      case DateTime.monday:
-        return l10n.weekdayFullMon;
-      case DateTime.tuesday:
-        return l10n.weekdayFullTue;
-      case DateTime.wednesday:
-        return l10n.weekdayFullWed;
-      case DateTime.thursday:
-        return l10n.weekdayFullThu;
-      case DateTime.friday:
-        return l10n.weekdayFullFri;
-      case DateTime.saturday:
-        return l10n.weekdayFullSat;
-      case DateTime.sunday:
-        return l10n.weekdayFullSun;
-      default:
-        return l10n.weekdayFullMon;
-    }
-  }
+  final date = DateTime(2024, 1, weekday + (weekday == 7 ? 0 : 7)); // Ensure we get the right weekday
+  return DateFormat(useShortName ? 'E' : 'EEEE').format(date);
 }
 
 int _dayOfWeekToNumber(String dayOfWeek) {

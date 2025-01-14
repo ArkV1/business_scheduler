@@ -23,18 +23,6 @@
     "@availableServices": {
         "description": "Title for the available services section"
     },
-    "selectTimeAndService": "Select Time & Service",
-    "@selectTimeAndService": {
-        "description": "Title for the time and service selection screen"
-    },
-    "selectService": "Select a service",
-    "@selectService": {
-        "description": "Prompt to select a service"
-    },
-    "selectTimeSlot": "Select a time slot",
-    "@selectTimeSlot": {
-        "description": "Prompt to select a time slot"
-    },
     "appointmentBookedSuccessfully": "Appointment booked successfully!",
     "@appointmentBookedSuccessfully": {
         "description": "Message shown when appointment is booked"
@@ -43,18 +31,8 @@
     "@errorBookingAppointment": {
         "description": "Message shown when appointment booking fails"
     },
-    "basicService": "Basic Service",
-    "premiumService": "Premium Service",
-    "duration30min": "30 min",
-    "duration60min": "60 min",
-    "price50": "$50",
-    "price100": "$100",
     "myAppointments": "My Appointments",
     "bookAppointment": "Book Appointment",
-    "quickContact": "Quick Contact",
-    "call": "Call",
-    "whatsapp": "WhatsApp",
-    "email": "Email",
     "language": "Language",
     "settings": "Settings",
     "home": "Home",
@@ -76,48 +54,6 @@
     "calendarAvailable": "Available",
     "calendarUnavailable": "Unavailable",
     "calendarClosed": "Closed",
-
-    "weekdayMon": "MON",
-    "weekdayTue": "TUE",
-    "weekdayWed": "WED",
-    "weekdayThu": "THU",
-    "weekdayFri": "FRI",
-    "weekdaySat": "SAT",
-    "weekdaySun": "SUN",
-
-    "weekdayFullMon": "Monday",
-    "weekdayFullTue": "Tuesday",
-    "weekdayFullWed": "Wednesday",
-    "weekdayFullThu": "Thursday",
-    "weekdayFullFri": "Friday",
-    "weekdayFullSat": "Saturday",
-    "weekdayFullSun": "Sunday",
-
-    "monthJan": "January",
-    "monthFeb": "February",
-    "monthMar": "March",
-    "monthApr": "April",
-    "monthMay": "May",
-    "monthJun": "June",
-    "monthJul": "July",
-    "monthAug": "August",
-    "monthSep": "September",
-    "monthOct": "October",
-    "monthNov": "November",
-    "monthDec": "December",
-
-    "monthShortJan": "Jan",
-    "monthShortFeb": "Feb",
-    "monthShortMar": "Mar",
-    "monthShortApr": "Apr",
-    "monthShortMay": "May",
-    "monthShortJun": "Jun",
-    "monthShortJul": "Jul",
-    "monthShortAug": "Aug",
-    "monthShortSep": "Sep",
-    "monthShortOct": "Oct",
-    "monthShortNov": "Nov",
-    "monthShortDec": "Dec",
 
     "openingHours": "Opening Hours",
     "services": "Services",
@@ -673,41 +609,5 @@
     "pastDate": "Past Date",
     "@pastDate": {
         "description": "Label for past dates"
-    },
-    "dateRangeFormat": "{startMonth} {startDay} - {endMonth} {endDay}",
-    "@dateRangeFormat": {
-        "description": "Format for displaying date range in calendar",
-        "placeholders": {
-            "startMonth": {
-                "type": "String",
-                "example": "Jan"
-            },
-            "startDay": {
-                "type": "String",
-                "example": "1"
-            },
-            "endMonth": {
-                "type": "String",
-                "example": "Jan"
-            },
-            "endDay": {
-                "type": "String",
-                "example": "7"
-            }
-        }
-    },
-    "monthYearFormat": "{month} {year}",
-    "@monthYearFormat": {
-        "description": "Format for displaying month and year in calendar",
-        "placeholders": {
-            "month": {
-                "type": "String",
-                "example": "January"
-            },
-            "year": {
-                "type": "String",
-                "example": "2024"
-            }
-        }
     }
 }

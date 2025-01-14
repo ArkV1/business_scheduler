@@ -419,7 +419,7 @@ class AppointmentCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final formattedTime = ref.watch(formattedTimeSlotProvider(appointment.timeSlot));
-    final service = ref.watch(businessServicesProvider).value?.firstWhere((service) => service.id == appointment.serviceId);
+    final service = ref.watch(businessServicesProvider).value?.where((service) => service.id == appointment.serviceId).firstOrNull;
     final l10n = AppLocalizations.of(context)!;
     
     return Card(

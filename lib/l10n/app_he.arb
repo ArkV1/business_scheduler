@@ -1,5 +1,5 @@
 {
-    "availableDates": "תאריכים זנויים",
+    "availableDates": "תאריכים פנויים", 
     "@availableDates": {
         "description": "Title for the available dates section"
     },
@@ -7,33 +7,9 @@
     "@selectDateAndTime": {
         "description": "Title for the date and time selection screen"
     },
-    "bookingInstructions": "בחר תאריך זמין מהלוח שנה למטה, ולאחר מכן בחר את השעה והשירות המועדפים עליך.",
-    "@bookingInstructions": {
-        "description": "Instructions for booking an appointment"
-    },
-    "scheduleNextVisit": "קבע את הביקור הבא שלך",
-    "@scheduleNextVisit": {
-        "description": "Subtitle for book appointment button"
-    },
-    "viewScheduledVisits": "צפה בביקורים המתוכננים שלך",
-    "@viewScheduledVisits": {
-        "description": "Subtitle for my appointments button"
-    },
     "availableServices": "שירותים זמינים",
     "@availableServices": {
         "description": "Title for the available services section"
-    },
-    "selectTimeAndService": "בחירת זמן ושירות",
-    "@selectTimeAndService": {
-        "description": "Title for the time and service selection screen"
-    },
-    "selectService": "בחר שירות",
-    "@selectService": {
-        "description": "Prompt to select a service"
-    },
-    "selectTimeSlot": "בחר שעה",
-    "@selectTimeSlot": {
-        "description": "Prompt to select a time slot"
     },
     "appointmentBookedSuccessfully": "התור נקבע בהצלחה!",
     "@appointmentBookedSuccessfully": {
@@ -43,18 +19,8 @@
     "@errorBookingAppointment": {
         "description": "Message shown when appointment booking fails"
     },
-    "basicService": "שירות בסיסי",
-    "premiumService": "שירות פרימיום",
-    "duration30min": "30 דקות",
-    "duration60min": "60 דקות",
-    "price50": "₪50",
-    "price100": "₪100",
     "myAppointments": "התורים שלי",
     "bookAppointment": "קביעת תור",
-    "quickContact": "יצירת קשר מהיר",
-    "call": "שיחה",
-    "whatsapp": "וואטסאפ",
-    "email": "אימייל",
     "language": "שפה",
     "settings": "הגדרות",
     "home": "בית",
@@ -72,62 +38,16 @@
     "@noOpeningHoursAvailable": {
         "description": "Message shown when no opening hours are available"
     },
-    
-    "calendarAvailable": "זנוי",
-    "calendarUnavailable": "תפוס",
+    "calendarAvailable": "זמין",
+    "calendarUnavailable": "לא זמין",
     "calendarClosed": "סגור",
-
-    "weekdayMon": "ב׳",
-    "weekdayTue": "ג׳",
-    "weekdayWed": "ד׳",
-    "weekdayThu": "ה׳",
-    "weekdayFri": "ו׳",
-    "weekdaySat": "ש׳",
-    "weekdaySun": "א׳",
-
-    "weekdayFullMon": "יום שני",
-    "weekdayFullTue": "יום שלישי",
-    "weekdayFullWed": "יום רביעי",
-    "weekdayFullThu": "יום חמישי",
-    "weekdayFullFri": "יום שישי",
-    "weekdayFullSat": "שבת",
-    "weekdayFullSun": "יום ראשון",
-
-    "monthJan": "ינואר",
-    "monthFeb": "פברואר",
-    "monthMar": "מרץ",
-    "monthApr": "אפריל",
-    "monthMay": "מאי",
-    "monthJun": "יוני",
-    "monthJul": "יולי",
-    "monthAug": "אוגוסט",
-    "monthSep": "ספטמבר",
-    "monthOct": "אוקטובר",
-    "monthNov": "נובמבר",
-    "monthDec": "דצמבר",
-
-    "monthShortJan": "ינו׳",
-    "monthShortFeb": "פבר׳",
-    "monthShortMar": "מרץ",
-    "monthShortApr": "אפר׳",
-    "monthShortMay": "מאי",
-    "monthShortJun": "יוני",
-    "monthShortJul": "יולי",
-    "monthShortAug": "אוג׳",
-    "monthShortSep": "ספט׳",
-    "monthShortOct": "אוק׳",
-    "monthShortNov": "נוב׳",
-    "monthShortDec": "דצמ׳",
-
     "openingHours": "שעות פתיחה",
     "services": "שירותים",
     "gallery": "גלריה",
-
     "closed": "סגור",
     "manageOpeningHours": "ניהול שעות פתיחה",
     "actions": "פעולות מהירות",
     "contact": "צור קשר",
-
     "openingHoursTitle": "שעות פתיחה",
     "@openingHoursTitle": {
         "description": "Title for the opening hours section"
@@ -192,16 +112,16 @@
         "placeholders": {
             "note": {
                 "type": "String",
-                "example": "Early closing for holiday"
+                "example": "סגירה מוקדמת בשל חג"
             }
         }
     },
     "adminNoAccess": "אין לך גישת מנהל",
-    "goHome": "חזור לדף הבית",
-    "businessManagement": "ניהול עסק",
+    "goHome": "חזרה לדף הבית",
+    "businessManagement": "ניהול העסק",
     "servicesTitle": "שירותים",
     "servicesSubtitle": "ניהול שירותים ומחירים",
-    "openingHoursSubtitle": "הגדרת שעות פעילות ותאריכים מיוחדים",
+    "openingHoursSubtitle": "הגדרת שעות פתיחה ותאריכים מיוחדים",
     "contentManagement": "ניהול תוכן",
     "galleryTitle": "גלריה",
     "gallerySubtitle": "ניהול גלריית תמונות",
@@ -213,19 +133,19 @@
     "manageServices": "ניהול שירותים",
     "manageCategories": "ניהול קטגוריות",
     "initializeDefaultServices": "אתחול שירותים ברירת מחדל",
-    "addNewService": "הוסף שירות חדש",
+    "addNewService": "הוספת שירות חדש",
     "noCategories": "אין קטגוריות זמינות",
     "noServices": "אין שירותים זמינים",
-    "deleteService": "מחק שירות",
+    "deleteService": "מחיקת שירות",
     "deleteServiceConfirm": "האם אתה בטוח שברצונך למחוק שירות זה?",
     "cancel": "ביטול",
-    "delete": "מחק",
+    "delete": "מחיקה",
     "serviceUpdated": "השירות עודכן",
     "serviceDeleted": "השירות נמחק",
     "serviceCreated": "השירות נוצר",
     "error": "שגיאה: {error}",
-    "addService": "הוסף שירות",
-    "editService": "ערוך שירות",
+    "addService": "הוספת שירות",
+    "editService": "עריכת שירות",
     "category": "קטגוריה",
     "selectCategory": "אנא בחר קטגוריה",
     "nameEnglish": "שם (אנגלית)",
@@ -243,66 +163,84 @@
     "descriptionEnglish": "תיאור (אנגלית)",
     "descriptionHebrew": "תיאור (עברית)",
     "addons": "תוספות:",
-    "addAddon": "הוסף תוספת",
-    "save": "שמור",
-    "add": "הוסף",
+    "addAddon": "הוספת תוספת",
+    "save": "שמירה",
+    "add": "הוספה",
     "initializeConfirmTitle": "אתחול שירותים ברירת מחדל",
     "initializeConfirmMessage": "פעולה זו תמחק את כל השירותים הקיימים ותיצור את ערכת ברירת המחדל. האם אתה בטוח שברצונך להמשיך?",
-    "initialize": "אתחל",
+    "initialize": "אתחול",
     "servicesInitialized": "שירותי ברירת המחדל אותחלו בהצלחה",
-    "errorInitializing": "שגיאה באתחול השירותים: {error}",
+    "errorInitializing": "שגיאה באתחול שירותים: {error}",
     "minutes": "דקות",
-    "manageCategories": "ניהול קטגוריות",
-    "noCategories": "אין קטגוריות זמינות",
     "initializeDefaultCategories": "אתחול קטגוריות ברירת מחדל",
     "initializeCategoriesConfirmTitle": "אתחול קטגוריות ברירת מחדל",
     "initializeCategoriesConfirmMessage": "פעולה זו תיצור את ערכת קטגוריות ברירת המחדל. האם אתה בטוח שברצונך להמשיך?",
     "categoriesInitialized": "קטגוריות ברירת המחדל אותחלו",
-    "errorReorderingCategories": "שגיאה בסידור מחדש של הקטגוריות: {error}",
+    "errorReorderingCategories": "שגיאה בסידור מחדש של קטגוריות: {error}",
     "categoryCreated": "הקטגוריה נוצרה",
     "categoryUpdated": "הקטגוריה עודכנה",
-    "deleteCategory": "מחק קטגוריה",
-    "deleteCategoryConfirm": "האם אתה בטוח שברצונך למחוק קטגוריה זו? פעולה זו תמחק גם את כל תתי הקטגוריות והתוספות.",
+    "deleteCategory": "מחיקת קטגוריה",
+    "deleteCategoryConfirm": "האם אתה בטוח שברצונך למחוק קטגוריה זו? פעולה זו תמחק גם את כל תתי-הקטגוריות והתוספות.",
     "categoryDeleted": "הקטגוריה נמחקה",
-    "subcategories": "{count} תתי קטגוריות",
-    "addCategory": "הוסף קטגוריה",
-    "editCategory": "ערוך קטגוריה",
-    "addNewCategory": "הוסף קטגוריה חדשה",
-    "errorUpdatingHours": "שגיאה בעדכון שעות הפתיחה: {error}",
-    "galleryTitle": "גלריה",
+    "subcategories": "{count} תתי-קטגוריות",
+    "addCategory": "הוספת קטגוריה",
+    "editCategory": "עריכת קטגוריה",
+    "addNewCategory": "הוספת קטגוריה חדשה",
+    "addDay": "הוספת יום",
+    "done": "סיום",
+    "specialHours": "שעות מיוחדות",
+    "edit": "עריכה",
+    "noOpeningHours": "לא הוגדרו שעות פתיחה",
+    "initializeDefaultHours": "אתחול שעות ברירת מחדל",
+    "selectDayToAdd": "בחר יום להוספה",
+    "allDaysAdded": "כל הימים כבר נוספו",
+    "removeDay": "הסרת {day}",
+    "removeDayMessage": "כיצד תרצה להסיר יום זה?",
+    "markAsClosed": "סמן כסגור",
+    "deleteCompletely": "מחק לחלוטין",
+    "dayMarkedClosed": "היום סומן כסגור",
+    "dayDeleted": "היום נמחק בהצלחה",
+    "errorUpdatingDay": "שגיאה בעדכון היום: {error}",
+    "hoursInitialized": "שעות הפתיחה אותחלו בהצלחה",
+    "errorInitializingHours": "שגיאה באתחול שעות פתיחה: {error}",
+    "editDay": "עריכת {day}",
+    "openTime": "שעת פתיחה",
+    "closeTime": "שעת סגירה",
+    "hoursUpdated": "שעות הפתיחה עודכנו בהצלחה",
+    "errorUpdatingHours": "שגיאה בעדכון שעות פתיחה: {error}",
     "imageUploadSuccess": "התמונה הועלתה בהצלחה",
-    "imageUploadError": "שגיאה בהעלאת התמונה: {error}",
+    "imageUploadError": "שגיאה בהעלאת תמונה: {error}",
     "imageDeleteSuccess": "התמונה נמחקה בהצלחה",
-    "imageDeleteError": "שגיאה במחיקת התמונה: {error}",
+    "imageDeleteError": "שגיאה במחיקת תמונה: {error}",
     "galleryError": "שגיאה: {error}",
-    "addPhoto": "הוסף תמונה",
+    "addPhoto": "הוספת תמונה",
     "preview": "תצוגה מקדימה",
     "socialLinks": "קישורים חברתיים",
-    "addNewLink": "הוסף קישור חדש",
+    "addNewLink": "הוספת קישור חדש",
     "noSocialLinks": "לא נוספו קישורים חברתיים",
-    "addSocialLink": "הוסף קישור חברתי",
-    "editSocialLink": "ערוך קישור חברתי",
-    "selectPlatform": "בחר פלטפורמה",
+    "addSocialLink": "הוספת קישור חברתי",
+    "editSocialLink": "עריכת קישור חברתי",
+    "selectPlatform": "בחירת פלטפורמה",
     "platformName": "שם הפלטפורמה",
     "enterPlatformName": "הכנס שם פלטפורמה",
-    "tapToSelectIcon": "לחץ לבחירת סמל",
+    "tapToSelectIcon": "הקש לבחירת סמל",
     "urlOrContact": "כתובת URL או פרטי קשר",
     "enterUrlOrContact": "הכנס כתובת URL או פרטי קשר",
-    "deleteSocialLink": "מחק קישור חברתי",
+    "deleteSocialLink": "מחיקת קישור חברתי",
     "deleteSocialLinkConfirm": "האם אתה בטוח שברצונך למחוק קישור חברתי זה?",
     "socialLinkAdded": "הקישור החברתי נוסף בהצלחה",
     "socialLinkUpdated": "הקישור החברתי עודכן בהצלחה",
     "socialLinkDeleted": "הקישור החברתי נמחק בהצלחה",
-    "errorDeletingSocialLink": "שגיאה במחיקת הקישור החברתי: {error}",
+    "errorDeletingSocialLink": "שגיאה במחיקת קישור חברתי: {error}",
     "errorPickingImage": "שגיאה בבחירת תמונה: {error}",
     "errorSavingSocialLink": "שגיאה: {error}",
-    "errorReorderingSocialLinks": "שגיאה בסידור מחדש של הקישורים החברתיים: {error}",
+    "errorReorderingSocialLinks": "שגיאה בסידור מחדש של קישורים חברתיים: {error}",
     "appSettings": "הגדרות אפליקציה",
     "general": "כללי",
-    "enableDarkMode": "הפעל מצב כהה",
-    "darkModeDescription": "החלף בין ערכת נושא בהירה לכהה",
-    "enableNotifications": "הפעל התראות",
-    "notificationsDescription": "קבל תזכורות ועדכונים לפגישות",
+    "enableDarkMode": "הפעלת מצב כהה",
+    "darkModeDescription": "החלפה בין ערכת נושא בהירה לכהה",
+    "enableNotifications": "הפעלת התראות",
+    "notificationsDescription": "קבלת תזכורות ועדכונים לגבי תורים",
     "appLanguage": "שפת האפליקציה",
     "english": "אנגלית",
     "hebrew": "עברית",
@@ -317,122 +255,48 @@
     "friday": "יום שישי",
     "saturday": "יום שבת",
     "sunday": "יום ראשון",
-    "startingDayOfWeek": "יום תחילת השבוע",
-    "startingDayOfWeekDescription": "בחר אם השבוע מתחיל ביום ראשון או ביום שני",
+    "startingDayOfWeek": "יום התחלת השבוע",
+    "startingDayOfWeekDescription": "בחר האם השבוע מתחיל ביום ראשון או יום שני",
     "sundayStart": "השבוע מתחיל ביום ראשון",
     "mondayStart": "השבוע מתחיל ביום שני",
-    "editHeader": "ערוך כותרת",
+    "calendarType": "סוג לוח שנה",
+    "calendarTypeDescription": "בחר בין לוח שנה גרגוריאני ולוח שנה עברי",
+    "gregorianCalendar": "לוח שנה גרגוריאני",
+    "jewishCalendar": "לוח שנה עברי",
+    "editHeader": "עריכת כותרת",
     "headerUpdated": "טקסט הכותרת עודכן בהצלחה",
-    "adminDashboard": "לוח בקרה",
-    "adminSettings": "הגדרות מערכת",
-    "admin": "ניהול",
+    "adminDashboard": "לוח בקרה למנהל",
+    "adminSettings": "הגדרות מנהל",
+    "admin": "מנהל",
     "register": "הרשמה",
     "profile": "פרופיל",
-    "appointmentBooking": "הזמנת תור",
+    "appointmentBooking": "קביעת תור",
     "welcomeBack": "ברוך שובך",
-    "@welcomeBack": {
-        "description": "Welcome message on login screen"
-    },
     "phoneNumber": "מספר טלפון",
-    "@phoneNumber": {
-        "description": "Label for phone number input"
-    },
     "pleaseEnterPhoneNumber": "אנא הכנס מספר טלפון",
-    "@pleaseEnterPhoneNumber": {
-        "description": "Validation message for empty phone number"
-    },
     "phoneNumberInternationalFormat": "מספר הטלפון חייב להיות בפורמט בינלאומי",
-    "@phoneNumberInternationalFormat": {
-        "description": "Validation message for phone number format"
-    },
     "verificationCode": "קוד אימות",
-    "@verificationCode": {
-        "description": "Label for verification code input"
-    },
     "pleaseEnterVerificationCode": "אנא הכנס את קוד האימות",
-    "@pleaseEnterVerificationCode": {
-        "description": "Validation message for empty verification code"
-    },
     "enterValidVerificationCode": "אנא הכנס קוד אימות תקין",
-    "@enterValidVerificationCode": {
-        "description": "Validation message for invalid verification code"
-    },
     "verificationCodeSent": "קוד האימות נשלח!",
-    "@verificationCodeSent": {
-        "description": "Success message when verification code is sent"
-    },
     "anErrorOccurred": "אירעה שגיאה",
-    "@anErrorOccurred": {
-        "description": "Generic error message"
-    },
-    "verifyAndLogin": "אמת והתחבר",
-    "@verifyAndLogin": {
-        "description": "Button text for verification and login"
-    },
+    "verifyAndLogin": "אימות וכניסה",
     "sendCode": "שלח קוד",
-    "@sendCode": {
-        "description": "Button text for sending verification code"
-    },
     "dontHaveAccount": "אין לך חשבון? הירשם",
-    "@dontHaveAccount": {
-        "description": "Link text to registration page"
-    },
     "forgotPassword": "שכחת סיסמה?",
-    "@forgotPassword": {
-        "description": "Link text to forgot password page"
-    },
     "createAccount": "יצירת חשבון",
-    "@createAccount": {
-        "description": "Title for the registration screen"
-    },
     "fullName": "שם מלא",
-    "@fullName": {
-        "description": "Label for full name input"
-    },
     "pleaseEnterFullName": "אנא הכנס את שמך המלא",
-    "@pleaseEnterFullName": {
-        "description": "Validation message for empty full name"
-    },
     "email": "דוא\"ל",
-    "@email": {
-        "description": "Label for email input"
-    },
-    "pleaseEnterEmail": "אנא הכנס את כתובת הדוא\"ל שלך",
-    "@pleaseEnterEmail": {
-        "description": "Validation message for empty email"
-    },
+    "pleaseEnterEmail": "אנא הכנס כתובת דוא\"ל",
     "pleaseEnterValidEmail": "אנא הכנס כתובת דוא\"ל תקינה",
-    "@pleaseEnterValidEmail": {
-        "description": "Validation message for invalid email format"
-    },
     "verifyAndRegister": "אימות והרשמה",
-    "@verifyAndRegister": {
-        "description": "Button text for verification and registration"
-    },
     "alreadyHaveAccount": "כבר יש לך חשבון? התחבר",
-    "@alreadyHaveAccount": {
-        "description": "Link text to login page"
-    },
-    "forgotYourPassword": "שכחת את הסיסמה?",
-    "@forgotYourPassword": {
-        "description": "Title for forgot password screen"
-    },
+    "forgotYourPassword": "שכחת את הסיסמה שלך?",
     "forgotPasswordInstructions": "הכנס את כתובת הדוא\"ל שלך ונשלח לך הוראות לאיפוס הסיסמה.",
-    "@forgotPasswordInstructions": {
-        "description": "Instructions text on forgot password screen"
-    },
     "sendResetLink": "שלח קישור לאיפוס",
-    "@sendResetLink": {
-        "description": "Button text for sending password reset link"
-    },
     "backToLogin": "חזרה להתחברות",
-    "@backToLogin": {
-        "description": "Link text to go back to login"
-    },
     "passwordResetEmailSent": "נשלח דוא\"ל לאיפוס הסיסמה. אנא בדוק את תיבת הדואר הנכנס שלך.",
-    "@passwordResetEmailSent": {
-        "description": "Success message after sending reset email"
-    },
     "password": "סיסמה",
     "pleaseEnterPassword": "אנא הכנס סיסמה",
     "passwordTooShort": "הסיסמה חייבת להכיל לפחות 6 תווים",
@@ -440,207 +304,51 @@
     "pleaseConfirmPassword": "אנא אמת את הסיסמה",
     "passwordsDoNotMatch": "הסיסמאות אינן תואמות",
     "notLoggedIn": "לא מחובר",
-    "@notLoggedIn": {
-        "description": "Message shown when user is not logged in"
-    },
-    "editProfile": "ערוך פרופיל",
-    "@editProfile": {
-        "description": "Button text for editing profile"
-    },
-    "addPhoneNumber": "הוסף מספר טלפון",
-    "@addPhoneNumber": {
-        "description": "Tooltip for adding phone number"
-    },
-    "phoneNumberNotSet": "לא הוגדר - הוסף מספר טלפון כדי לאפשר לעסקים ליצור איתך קשר",
-    "@phoneNumberNotSet": {
-        "description": "Message shown when phone number is not set"
-    },
+    "editProfile": "עריכת פרופיל",
+    "addPhoneNumber": "הוספת מספר טלפון",
+    "phoneNumberNotSet": "לא הוגדר - הוסף את מספר הטלפון שלך כדי לאפשר לעסקים ליצור איתך קשר",
     "adminStatus": "סטטוס מנהל",
-    "@adminStatus": {
-        "description": "Label for admin status"
-    },
     "administrator": "מנהל מערכת",
-    "@administrator": {
-        "description": "Text showing administrator role"
-    },
-    "selectServiceAndTime": "בחירת שירות וזמן",
-    "@selectServiceAndTime": {
-        "description": "Title for the service and time selection dialog"
-    },
-    "availableTimeSlots": "זמנים פנויים",
-    "@availableTimeSlots": {
-        "description": "Title for the available time slots section"
-    },
+    "selectServiceAndTime": "בחירת שירות ושעה",
+    "availableTimeSlots": "שעות זמינות",
     "selectServiceFirst": "אנא בחר שירות תחילה",
-    "@selectServiceFirst": {
-        "description": "Message shown when no service is selected"
-    },
     "confirm": "אישור",
-    "@confirm": {
-        "description": "Text for confirm button"
-    },
-    "timeSlotNotAvailable": "משך זמן השירות שנבחר אינו מתאים לשעה זו",
-    "@timeSlotNotAvailable": {
-        "description": "Message shown when a time slot cannot accommodate the selected service duration"
-    },
+    "timeSlotNotAvailable": "שעה זו אינה זמינה עבור משך השירות שנבחר",
     "pleaseSignInToBook": "אנא התחבר כדי לקבוע תור",
-    "@pleaseSignInToBook": {
-        "description": "Message shown when trying to book without being logged in"
-    },
-    "pleaseSelectServiceAndTime": "אנא בחר שירות ושעה",
-    "@pleaseSelectServiceAndTime": {
-        "description": "Message shown when service or time slot is not selected"
-    },
+    "pleaseSelectServiceAndTime": "אנא בחר גם שירות וגם שעה",
     "appointmentCreatedSuccessfully": "התור נקבע בהצלחה!",
-    "@appointmentCreatedSuccessfully": {
-        "description": "Message shown when appointment is created successfully"
-    },
-    "errorCreatingAppointment": "שגיאה בקביעת התור",
-    "@errorCreatingAppointment": {
-        "description": "Message shown when there's an error creating the appointment"
-    },
+    "errorCreatingAppointment": "שגיאה ביצירת התור",
     "manageAppointments": "ניהול תורים",
-    "@manageAppointments": {
-        "description": "Title for the appointments management screen"
-    },
     "appointmentsOverview": "סקירת תורים",
-    "@appointmentsOverview": {
-        "description": "Title for the appointments overview section"
-    },
     "filterAppointments": "סינון תורים",
-    "@filterAppointments": {
-        "description": "Tooltip for the filter appointments button"
-    },
     "showCalendar": "הצג לוח שנה",
-    "@showCalendar": {
-        "description": "Tooltip for showing calendar view"
-    },
     "showList": "הצג רשימה",
-    "@showList": {
-        "description": "Tooltip for showing list view"
-    },
     "noAppointmentsOnDate": "אין תורים בתאריך {date}",
-    "@noAppointmentsOnDate": {
-        "description": "Message shown when there are no appointments on a specific date",
-        "placeholders": {
-            "date": {
-                "type": "String",
-                "example": "Jan 21, 2024"
-            }
-        }
-    },
     "noAppointmentsFound": "לא נמצאו תורים",
-    "@noAppointmentsFound": {
-        "description": "Message shown when no appointments are found"
-    },
     "clientId": "מזהה לקוח: {id}",
-    "@clientId": {
-        "description": "Label for client ID",
-        "placeholders": {
-            "id": {
-                "type": "String",
-                "example": "123456"
-            }
-        }
-    },
     "service": "שירות",
-    "@service": {
-        "description": "Label for service"
-    },
     "unknownService": "שירות לא ידוע",
-    "@unknownService": {
-        "description": "Text shown when service is unknown"
-    },
     "durationMinutes": "{duration} דקות",
-    "@durationMinutes": {
-        "description": "Format for duration in minutes",
-        "placeholders": {
-            "duration": {
-                "type": "int",
-                "example": "30"
-            }
-        }
-    },
     "priceAmount": "₪{amount}",
-    "@priceAmount": {
-        "description": "Format for price amount",
-        "placeholders": {
-            "amount": {
-                "type": "String",
-                "example": "50"
-            }
-        }
-    },
     "notes": "הערות",
-    "@notes": {
-        "description": "Label for notes"
-    },
-    "editAppointment": "ערוך תור",
-    "@editAppointment": {
-        "description": "Tooltip for edit appointment button"
-    },
+    "editAppointment": "עריכת תור",
     "appointmentsManagement": "תורים",
-    "@appointmentsManagement": {
-        "description": "Title for the appointments management section in admin dashboard"
-    },
     "appointmentsManagementSubtitle": "צפייה וניהול כל התורים",
-    "@appointmentsManagementSubtitle": {
-        "description": "Subtitle for the appointments management section in admin dashboard"
-    },
     "weekView": "תצוגת שבוע",
-    "@weekView": {
-        "description": "Tooltip for week view button"
-    },
     "monthView": "תצוגת חודש",
-    "@monthView": {
-        "description": "Tooltip for month view button"
-    },
-    "available": "פנוי",
-    "@available": {
-        "description": "Label for available dates"
-    },
-    "fullyBooked": "תפוס",
-    "@fullyBooked": {
-        "description": "Label for fully booked dates"
-    },
+    "available": "זמין",
+    "fullyBooked": "מלא",
     "pastDate": "תאריך עבר",
-    "@pastDate": {
-        "description": "Label for past dates"
+    "bookingInstructions": "בחר תאריך זמין מהלוח למטה, ואז בחר את השעה והשירות המועדפים עליך.",
+    "@bookingInstructions": {
+        "description": "Instructions for booking an appointment"
     },
-    "dateRangeFormat": "{endDay} {endMonth} - {startDay} {startMonth}",
-    "@dateRangeFormat": {
-        "description": "Format for displaying date range in calendar",
-        "placeholders": {
-            "startMonth": {
-                "type": "String",
-                "example": "Jan"
-            },
-            "startDay": {
-                "type": "String",
-                "example": "1"
-            },
-            "endMonth": {
-                "type": "String",
-                "example": "Jan"
-            },
-            "endDay": {
-                "type": "String",
-                "example": "7"
-            }
-        }
+    "scheduleNextVisit": "קבע את הביקור הבא שלך",
+    "@scheduleNextVisit": {
+        "description": "Subtitle for book appointment button"
     },
-    "monthYearFormat": "{month} {year}",
-    "@monthYearFormat": {
-        "description": "Format for displaying month and year in calendar",
-        "placeholders": {
-            "month": {
-                "type": "String",
-                "example": "January"
-            },
-            "year": {
-                "type": "String",
-                "example": "2024"
-            }
-        }
+    "viewScheduledVisits": "צפה בביקורים המתוכננים שלך",
+    "@viewScheduledVisits": {
+        "description": "Subtitle for my appointments button"
     }
 }

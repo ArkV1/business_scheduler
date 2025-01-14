@@ -150,16 +150,6 @@ class DatePicker extends ConsumerWidget {
   }
 
   String _formatWeekday(BuildContext context, DateTime date) {
-    final l10n = AppLocalizations.of(context)!;
-    final weekdays = [
-      l10n.weekdaySun,
-      l10n.weekdayMon,
-      l10n.weekdayTue,
-      l10n.weekdayWed,
-      l10n.weekdayThu,
-      l10n.weekdayFri,
-      l10n.weekdaySat,
-    ];
-    return weekdays[date.weekday % 7];
+    return DateFormat('E').format(date).toUpperCase();
   }
 }

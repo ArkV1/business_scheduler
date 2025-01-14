@@ -2,6 +2,7 @@ import 'package:business_scheduler/features/appointments/models/appointment.dart
 import 'package:business_scheduler/features/home/models/opening_hours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 class CalendarMonthView extends StatelessWidget {
   final bool isAdmin;
@@ -41,27 +42,23 @@ class CalendarMonthView extends StatelessWidget {
           height: 20,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              l10n.weekdaySun,
-              l10n.weekdayMon,
-              l10n.weekdayTue,
-              l10n.weekdayWed,
-              l10n.weekdayThu,
-              l10n.weekdayFri,
-              l10n.weekdaySat,
-            ].map((day) => SizedBox(
-                  width: 32,
-                  child: Center(
-                    child: Text(
-                      day,
-                      style: const TextStyle(
-                        fontSize: 10,
-                        color: Colors.grey,
-                      ),
+            children: List.generate(7, (index) {
+              final date = DateTime(2024, 1, 7 + index); // Start with a Sunday
+              return SizedBox(
+                width: 32,
+                child: Center(
+                  child: Text(
+                    DateFormat('E', Localizations.localeOf(context).languageCode)
+                        .format(date)
+                        .toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
                     ),
                   ),
-                ))
-                .toList(),
+                ),
+              );
+            }),
           ),
         ),
         const SizedBox(height: 2),
